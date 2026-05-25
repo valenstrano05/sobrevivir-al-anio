@@ -1,10 +1,13 @@
 # Archivos de compilación
 *.o
 *.d
-
-# Ejecutables
 *.exe
+*.out
 
 # Archivos de CodeBlocks
 *.layout
 *.depend
+
+# Carpetas de compilación
+*bin/
+*obj/
