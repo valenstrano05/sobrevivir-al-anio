@@ -38,7 +38,7 @@ int main(){
             escribirLento("¿s/n?", 40);
             cout<<endl;
             cin>>salida;
-                    switch(salida){
+                switch(salida){
                 case 's':
                     escribirLento("Saliendo del juego", 40);
                     Sleep(100);
