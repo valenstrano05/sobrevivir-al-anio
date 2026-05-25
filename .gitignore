@@ -1,0 +1,10 @@
+# Archivos de compilación
+*.o
+*.d
+
+# Ejecutables
+*.exe
+
+# Archivos de CodeBlocks
+*.layout
+*.depend
