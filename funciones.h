@@ -2,11 +2,12 @@
 #define FUNCIONES_H_INCLUDED
 #include <string>
 
-float jugarPartida(std::string nombre, int rondas);
+void jugarPartida(std::string nombre, int rondas);
 void escribirLento(std::string texto, int velocidad);
-int menuPrincipal();
+void menuPrincipal();
 void crearPartidaNueva();
 int highscoreDeLaSesion();
-int glosarioFinanciero();
+void glosarioFinanciero();
+void cargarDatos(float economia[], float inversiones[], float preciosInversiones[], float eventosFijos[], float contadoresAcumuladores[]);
 
 #endif // FUNCIONES_H_INCLUDED
