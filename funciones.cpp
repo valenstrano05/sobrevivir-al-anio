@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <ctime>
+#include "rlutil.h" //nueva libreria para meterle facha al juego.
 
 /*const int index_Sueldo=0;
 
@@ -55,6 +56,12 @@ vec[index_Sueldo]*/
 
 using namespace std;
 
+void glosario(){
+            cout<<"========================================================================="<<endl; //
+            cout<<"                           GLOSARIO FINANCIERO                           "<<endl; // cartel de glosario q meti en una funcion para ahorrar espacio.
+            cout<<"========================================================================="<<endl; //
+}
+
 void escribirLento(string texto, int velocidad){
     for(int i=0;i<texto.length();i++){
         cout<<texto[i];
@@ -67,6 +74,7 @@ void menuPrincipal(){
     int opcion=1;
     char salida;
         while(opcion!=0){
+        rlutil::setBackgroundColor(rlutil::BLACK); //hace que el fondo sea negro.
         system("cls");
         cout<<"====================================="<<endl;
         cout<<"            MENÚ PRINCIPAL           "<<endl;
@@ -179,130 +187,125 @@ int highscoreDeLaSesion(){
 
 void glosarioFinanciero(){
     int opcion;
+    string entrada;
+    bool mostrarMenu=1; // flag para ayudar con la navegación de las páginas del glosario.
+    rlutil::setBackgroundColor(rlutil::BLUE); //cambia el color del fondo a azul.
     while(true){
-        system("cls");
-        cout<<"=============================================="<<endl;
-        cout<<"             GLOSARIO FINANCIERO              "<<endl;
-        cout<<"=============================================="<<endl;
-        cout<<" 1. Costo de oportunidad"<<endl;
-        cout<<" 2. Diversificacion"<<endl;
-        cout<<" 3. ETF (Exchange-Traded Fund)"<<endl;
-        cout<<" 4. Fondo de emergencia"<<endl;
-        cout<<" 5. Indexacion"<<endl;
-        cout<<" 6. Inflacion"<<endl;
-        cout<<" 7. Liquidez"<<endl;
-        cout<<" 8. Poder adquisitivo"<<endl;
-        cout<<" 9. Salario real"<<endl;
-        cout<<" 10. Salario nominal"<<endl;
-        cout<<" 11. Volatilidad"<<endl;
-        cout<<" 0. Volver al menu"<<endl;
-        cout<<""<<endl;
-        cout<<" Ingrese una opción: ";
-        cin>>opcion;
-        cout<<""<<endl;
+            if(mostrarMenu){
+                rlutil::showcursor(); //vuelve a cargar el cursor, ya que al entrar a cualquier pagina del glosario se esconde el cursor.
+                system("cls");
+                glosario();
+                cout<<" 1. Costo de oportunidad"<<endl;
+                cout<<" 2. Diversificación"<<endl;
+                cout<<" 3. ETF (Exchange-Traded Fund)"<<endl;
+                cout<<" 4. Fondo de Emergencia"<<endl;
+                cout<<" 5. Indexación"<<endl;
+                cout<<" 6. Inflación"<<endl;
+                cout<<" 7. Liquidez"<<endl;
+                cout<<" 8. Poder Adquisitivo"<<endl;
+                cout<<" 9. Salario Real"<<endl;
+                cout<<" 10. Salario Nominal"<<endl;
+                cout<<" 11. Volatilidad"<<endl;
+                cout<<" 0. Volver al menu"<<endl;
+                cout<<""<<endl;
+                cout<<" Ingrese una página: "<<endl;
+                cout<<"=========================================================================";
+                rlutil::locate(22,17); //ubica el cursor en x22 y17.
+                cin >> entrada;
+                try {                       //
+                    opcion = stoi(entrada); // stoi (string to integer) convierte el string a un entero, y copia ese entero a la variable opcion.
+                } catch (...) {             // luego try prueba la opcion, y si fuese una opcion que devuelva error, catch lo atrapa antes de que el programa se rompa, y opcion se va a -1 para reiniciar.
+                    opcion = -1;            //
+                }
 
+
+            }
+            mostrarMenu=1; // si se ingresa una opción invalida se vuelve a mostrar el menu.
+            if(opcion==0){
+                return;
+            }
+            if(opcion>=1&&opcion<=11){
+                system("cls");
+            }
         switch (opcion)
         {
         case 1:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"el valor de la mejor alternativa que se resigna"<<endl;
-            cout<<"al tomar una decisión. Guardar plata en pesos"<<endl;
-            cout<<"tiene el costo de oportunidad de no invertirla."<<endl;
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"1. Costo de Oportunidad:"<<endl;
+            cout<<"El valor de la mejor alternativa que se resigna al tomar una decisión."<<endl;
+            cout<<"Guardar plata en pesos tiene el costo de oportunidad de no invertirla."<<endl;
             break;
         case 2:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"estrategia de distribuir el dinero entre distintos instrumentos para reducir el riesgo total. 'No poner todos los huevos en la misma canasta.'";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"2. Diversificación"<<endl;
+            cout<<"Estrategia de distribuir el dinero entre distintos instrumentos para"<<endl;
+            cout<<"reducir el riesgo total. 'No poner todos los huevos en la misma canasta.'"<<endl;
             break;
         case 3:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<" fondo de inversión que cotiza en bolsa y replica el comportamiento de un índice, como el S&P 500. Permite invertir en muchas empresas a la vez con bajo costo.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"3. ETF (Exchange-Traded Fund)"<<endl;
+            cout<<"Fondo de inversión que cotiza en bolsa"<<endl;
+            cout<<"y replica el comportamiento de un índice, como el S&P 500."<<endl;
+            cout<<"Permite invertir en muchas empresas a la vez con bajo costo."<<endl;
             break;
         case 4:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"reserva de dinero en efectivo o cuenta disponible para cubrir gastos imprevistos sin necesidad de endeudarse ni vender inversiones.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"4. Fondo de Emergencia"<<endl;
+            cout<<"Reserva de dinero en efectivo o cuenta disponible para cubrir "<<endl;
+            cout<<"gastos imprevistos sin necesidad de endeudarse ni vender inversiones."<<endl;
             break;
         case 5:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"mecanismo por el cual el valor de un contrato (como un alquiler) se ajusta periódicamente según un índice de precios, para mantener el valor real.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"5. Indexación"<<endl;
+            cout<<"Mecanismo por el cual el valor de un contrato (como un alquiler)"<<endl;
+            cout<<"se ajusta periódicamente según un índice de precios, "<<endl;
+            cout<<"para mantener el valor real."<<endl;
             break;
         case 6:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"aumento generalizado y sostenido de los precios de bienes y servicios. Hace que el dinero valga menos con el tiempo.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"6. Inflación"<<endl;
+            cout<<"Aumento generalizado y sostenido de los precios de bienes y servicios."<<endl;
+            cout<<"Hace que el dinero valga menos con el tiempo."<<endl;
             break;
         case 7:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"facilidad con la que un activo se puede convertir en dinero disponible. El efectivo es el activo más líquido; los inmuebles, el menos.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"7. Liquidez"<<endl;
+            cout<<"Facilidad con la que un activo se puede convertir en dinero disponible."<<endl;
+            cout<<"El efectivo es el activo más líquido; los inmuebles, el menos."<<endl;
             break;
         case 8:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"cantidad de bienes y servicios que se pueden comprar con una suma de dinero. Disminuye cuando hay inflación.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"8. Poder Adquisitivo"<<endl;
+            cout<<"Cantidad de bienes y servicios que se pueden comprar con"<<endl;
+            cout<<"una suma de dinero. Disminuye cuando hay inflación."<<endl;
             break;
         case 9:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"El salario real mide cuánto se puede comprar con ese dinero. Si la inflación supera al aumento del sueldo, el salario real cae.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"9. Salario Real"<<endl;
+            cout<<"El salario real mide cuánto se puede comprar con ese dinero."<<endl;
+            cout<<"Si la inflación supera al aumento del sueldo, el salario real cae."<<endl;
             break;
         case 10:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"el salario nominal es el número en el recibo de sueldo.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"10. Salario Nominal"<<endl;
+            cout<<"El salario nominal es el número en el recibo de sueldo.";
             break;
         case 11:
             system("cls");
-            cout<<"=============================================="<<endl;
-            cout<<"             GLOSARIO FINANCIERO              "<<endl;
-            cout<<"=============================================="<<endl;
-            cout<<"medida de cuánto varía el precio de un activo. Un instrumento muy volátil (como el Bitcoin) puede subir o bajar mucho en poco tiempo.";
-            system("pause");
-            glosarioFinanciero();
+            glosario();
+            cout<<"11. Volatilidad"<<endl;
+            cout<<"Medida de cuánto varía el precio de un activo. Un instrumento muy"<<endl;
+            cout<<"volátil (como el Bitcoin) puede subir o bajar mucho en poco tiempo."<<endl;
             break;
         case 0:
             return;
@@ -310,10 +313,24 @@ void glosarioFinanciero(){
         default:
             break;
         }
-
-        //cin>>opcion;
-        cout<<" =============================================="<<endl;
-
+        if(opcion>0&&opcion<12){
+        cout<<endl<<"    [<] Pág. Anterior   [>] Pág. Siguiente   [Esc] Volver al menu"<<endl;              //
+        cout<<"========================================================================="<<endl;            //
+        rlutil::hidecursor(); // esconde el cursor.
+        int tecla=rlutil::getkey();                                                                         //
+        if(tecla==rlutil::KEY_LEFT){                                                                        // aca le pedi ayuda a claude. basicamente getkey() agarra una tecla
+            opcion = (opcion > 1)?opcion-1:11;                                                              // y con un if comparo si es la tecla que quiero. si lo es, avanza o retrocede.
+            mostrarMenu=0;                                                                                  // si esta en la opcion 1 y retrocede, vuelve a la opcion 11. mismo con la opcion 11, vuelve a la 1.
+        } else if(tecla==rlutil::KEY_RIGHT){                                                                // ese (opcion<11)?opcion+1:1 es un else if resumido. si la opcion es menor a 11, la opcion suma 1.
+            opcion=(opcion<11)?opcion+1:1;                                                                  // si es mayor a 11, la opcion pasa a 1. (condición ? valor_si_verdadero : valor_si_falso)
+            mostrarMenu=0;                                                                                  //
+        } else if(tecla==rlutil::KEY_ESCAPE){
+            mostrarMenu=1;
+        }
+        if(tecla != rlutil::KEY_ESCAPE && tecla != rlutil::KEY_LEFT && tecla != rlutil::KEY_RIGHT){
+            mostrarMenu = 0;
+        }
+        }
     }
 }
 

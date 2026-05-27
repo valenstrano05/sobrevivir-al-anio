@@ -5,19 +5,20 @@
 #include <windows.h>
 #include <cstdlib>
 #include <ctime>
+#include "rlutil.h"
 
-///agregar dificultades. distintos dialogos dependiendo al dificultad. añadir explicacion del juego y tutorial opcional.
+///agregar dificultades. distintos dialogos dependiendo al dificultad. añadir tutorial opcional antes de iniciar juego.
 
 using namespace std;
 
 int main(){
     setlocale(LC_ALL,"");
     string nombre;
-    cout<<"=====================================";
+    cout<<"====================================="<<endl;
     cout<<endl;
-    cout<<"          SOBREVIVIR AL AÑO          ";
+    cout<<"          SOBREVIVIR AL AÑO          "<<endl;
     cout<<endl;
-    cout<<"=====================================";
+    cout<<"====================================="<<endl;
     cout<<endl;
     cout<<" Presione enter para continuar...";
     system("pause > nul");
