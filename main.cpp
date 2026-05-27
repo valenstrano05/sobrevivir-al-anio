@@ -7,8 +7,6 @@
 #include <ctime>
 #include "rlutil.h"
 
-///agregar dificultades. distintos dialogos dependiendo al dificultad. añadir tutorial opcional antes de iniciar juego.
-
 using namespace std;
 
 int main(){
