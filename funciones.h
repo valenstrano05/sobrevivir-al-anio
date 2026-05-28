@@ -9,5 +9,6 @@ void crearPartidaNueva();
 int highscoreDeLaSesion();
 void glosarioFinanciero();
 void cargarDatos(float economia[], float inversiones[], float preciosInversiones[], float eventosFijos[], float contadoresAcumuladores[]);
+void glosario();
 
 #endif // FUNCIONES_H_INCLUDED
