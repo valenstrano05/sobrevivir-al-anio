@@ -8,7 +8,11 @@ void menuPrincipal();
 void crearPartidaNueva();
 int highscoreDeLaSesion();
 void glosarioFinanciero();
-void cargarDatos(float economia[], float inversiones[], float preciosInversiones[], float eventosFijos[], float contadoresAcumuladores[]);
+void cargarDatos(double datos[]);
 void glosario();
+void eventosFijos(int mes, double datos[]);
+void imprevistos(double datos[]);
+void aumentoAlquiler(int indice, double datos[]);
+void aumentoPorInflacion(double datos[]);
 
 #endif // FUNCIONES_H_INCLUDED

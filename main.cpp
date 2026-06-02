@@ -6,17 +6,19 @@
 #include <cstdlib>
 #include <ctime>
 #include "rlutil.h"
-
-///agregar dificultades. distintos dialogos dependiendo al dificultad. añadir tutorial opcional antes de iniciar juego.
+#include <iomanip>
 
 using namespace std;
 
-int main(){
+int main()
+{
+    srand(time(0));
+    cout<<fixed<<setprecision(2);
     setlocale(LC_ALL,"");
     string nombre;
     cout<<"====================================="<<endl;
     cout<<endl;
-    cout<<"          SOBREVIVIR AL AÑO          "<<endl;
+    cout<<"         SOBREVIVIR AL AÑO           "<<endl;
     cout<<endl;
     cout<<"====================================="<<endl;
     cout<<endl;
@@ -24,5 +26,5 @@ int main(){
     system("pause > nul");
     menuPrincipal();
 
-return 0;
+    return 0;
 }
