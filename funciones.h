@@ -14,5 +14,6 @@ void eventosFijos(int mes, double datos[]);
 void imprevistos(double datos[]);
 void aumentoAlquiler(int indice, double datos[]);
 void aumentoPorInflacion(double datos[]);
+void mostrarResumen(double datos[]);
 
 #endif // FUNCIONES_H_INCLUDED

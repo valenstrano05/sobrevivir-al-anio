@@ -35,7 +35,6 @@ using namespace std;
 void jugarPartida(string nombre, int rondas)
 {
     double datosPartida[21];
-    bool gameOver=false;
     cargarDatos(datosPartida);
     for(int i=1; i<=rondas; i++)
     {
@@ -57,7 +56,7 @@ void jugarPartida(string nombre, int rondas)
         aumentoPorInflacion(datosPartida);
         system("pause");
     }
-    //return economia[1];
+    mostrarResumen(datosPartida);
 }
 
 void cargarDatos (double datos[])
@@ -258,9 +257,48 @@ void aumentoAlquiler(int indice, double datos[])
 
 void aumentoPorInflacion(double datos[])
 {
-    const float inflacion = 0.07;
-    datos[index_GastosComida]=datos[index_GastosComida]*1.07;
-    datos[index_GastosServicios]=datos[index_GastosServicios]*1.07;
-    datos[index_GastosTransporte]=datos[index_GastosTransporte]*1.07;
+    const float inflacion = 1.07;
+    datos[index_SaldoPesos]/=inflacion;
+    datos[index_FondoEmergencia]/=inflacion;
+    datos[index_GastosComida]*=inflacion;
+    datos[index_GastosServicios]*=inflacion;
+    datos[index_GastosTransporte]*=inflacion;
+    datos[index_GastosAlquiler]*=inflacion;
     datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
+    datos[index_InflacionAcumulada]*=1.07;
+}
+
+void mostrarResumen(double datos[]){
+    int resultado;
+    double patrimonio=datos[index_SaldoPesos]+datos[index_FondoEmergencia];
+    double patrimonioReal=patrimonio/datos[index_InflacionAcumulada];
+    system("cls");
+    cout<<"====================================="<<endl;
+    cout<<"           RESUMEN FINAL             "<<endl;
+    cout<<"Patrimonio nominal: $"<<patrimonio<<endl;
+    cout<<"Patrimonio real: $"<<patrimonioReal<<endl;
+    cout<<""<<endl;
+    if(patrimonioReal>500000*1.10){
+        resultado=0;
+    }else if(patrimonioReal>=500000*0.90){
+        resultado=1;
+    }else{
+        resultado=2;
+    }
+    switch (resultado)
+    {
+    case 0:
+        cout<<"¡Le ganaste a la inflacion!";
+        break;
+    case 1:
+        cout<<"Le empataste a la inflacion...Podría haber sido peor.";
+        break;
+    case 2:
+        cout<<"Que desastre... Te comió la inflación..."<<endl;
+        break;
+    default:
+        break;
+    }
+    cout<<"====================================="<<endl;
+    system("pause");
 }

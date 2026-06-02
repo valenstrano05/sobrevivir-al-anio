@@ -1,17 +1,17 @@
 TO DO
 
-hacer logica del juego (eventos fijos e imprevistos, panel de estado, dar opcion a invertir o ahorrar en fondo, tips educativos)
+-añadir el sistema de inversiones y al calculo del patrimonio real agregarle las inversiones pasadas a pesos
 
-hacer seccion de highscore (una vez terminada la logica del juego)
+-hacer seccion de highscore (una vez terminada la logica del juego)
 
-agregar dificultades con distintos dialogos dependiendo al dificultad 
-
-dejar el codigo mas lindo
+-dejar el codigo mas lindo (va bien, chequeamos cuando terminemos el juego)
 
 EXTRAS
 
-añadir tutorial opcional antes de iniciar juego
+-agregar dificultades con distintos dialogos dependiendo al dificultad 
 
-decorar mas las interfaces con rlutil (definitivamente)
+-añadir tutorial opcional antes de iniciar juego
 
-meter mas opciones de inversion (no se todavia)
+-decorar mas las interfaces con rlutil (definitivamente)
+
+-meter mas opciones de inversion (no se todavia)
