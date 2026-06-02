@@ -7,6 +7,7 @@
 # Archivos de CodeBlocks
 *.layout
 *.depend
+*.cscope_file_list
 
 # Carpetas de compilación
 *bin/
