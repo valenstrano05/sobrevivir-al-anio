@@ -15,5 +15,8 @@ void imprevistos(double datos[]);
 void aumentoAlquiler(int indice, double datos[]);
 void aumentoPorInflacion(double datos[]);
 void mostrarResumen(double datos[]);
+void inversiones(double datos[]);
+void opcionesDeInversion(double datos[]);
+void cartelInversion(double datos[], int opcion);
 
 #endif // FUNCIONES_H_INCLUDED
