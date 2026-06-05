@@ -42,14 +42,17 @@ void jugarPartida(string nombre, int rondas)
         cout<<"====================================="<<endl;
         cout<<"  MES "<<i<<"/"<<rondas<<"       Jugador: "<<nombre<<endl;
         cout<<"====================================="<<endl;
+                cout << "Saldo final: $" << datosPartida[index_SaldoPesos] << endl;
         imprevistos(datosPartida);
+                cout << "Saldo final: $" << datosPartida[index_SaldoPesos] << endl;
         eventosFijos(i, datosPartida);
+                cout << "Saldo final: $" << datosPartida[index_SaldoPesos] << endl;
         cout<<"TENENCIAS ACTUALES: "<<endl;
         cout<<"Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
         cout<<"Dolares: $"<<datosPartida[index_Dolares]<<endl;
         cout<<"Bitcoin: $"<<datosPartida[index_BTC]<<endl;
         cout<<"SP500: "<<datosPartida[index_SP500]<<endl;
-        cout<<""<<endl;
+        cout<<"-------------------------------------"<<endl;
         cout << "Sueldo: $" << datosPartida[index_Sueldo] << endl;
         cout << "Gastos fijos: $" << datosPartida[index_GastosFijos] << endl;
         cout << "Saldo final: $" << datosPartida[index_SaldoPesos] << endl;
@@ -153,54 +156,61 @@ void eventosFijos(int mes, double datos[])
     switch(mes)
     {
     case 1:
-        cout<<"Deposito de garantia"<<endl;
-        datos[index_SaldoPesos]-=datos[index_GastosAlquiler];
+        datos[index_SaldoPesos]+=150000;
+        cout<<"Deposito de garantia: -$180000"<<endl;
+        datos[index_SaldoPesos]-=180000;
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 2:
-
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 3:
-
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 4:
-        cout<<"Aumento paritario"<<endl;
+        cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 5:
-
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 6:
         cout<<"Aguinaldo"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 7:
-        cout<<"Aumento paritario"<<endl;
+        cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 8:
-
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 9:
         cout<<"Actualizacion de alquiler"<<endl;
         datos[index_GastosAlquiler]=datos[index_GastosAlquiler]*1.4;
         datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 10:
-        cout<<"Aumento paritario"<<endl;
+        cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 11:
-
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 12:
         cout<<"Aguinaldo"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
+        datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     default:
         break;
     }
     datos[index_SaldoPesos]+=datos[index_Sueldo];
-    datos[index_SaldoPesos]-=datos[index_GastosFijos];
 }
 
 
@@ -344,6 +354,7 @@ void mostrarResumen(double datos[])
 void inversiones(double datos[])
 {
     int opcion;
+    int aFondo;
     cout<<"como preferis distribuir tu saldo restante?"<<endl;
     cout<<"saldo: "<<datos[index_SaldoPesos]<<endl;
     cout<<""<<endl;
@@ -359,22 +370,26 @@ void inversiones(double datos[])
     switch (opcion)
     {
     case 1:
-        datos[index_FondoEmergencia]+=datos[index_SaldoPesos];
+        aFondo=datos[index_SaldoPesos];
         datos[index_SaldoPesos]-=datos[index_SaldoPesos];
+        datos[index_FondoEmergencia]+=aFondo;
         break;
     case 2:
-        datos[index_FondoEmergencia]+=(datos[index_SaldoPesos]*75)/100;
-        datos[index_SaldoPesos]-=(datos[index_FondoEmergencia]);
+        aFondo=(datos[index_SaldoPesos]*75)/100;
+        datos[index_SaldoPesos]-=aFondo;
+        datos[index_FondoEmergencia]+=aFondo;
         opcionesDeInversion(datos);
         break;
     case 3:
-        datos[index_FondoEmergencia]+=(datos[index_SaldoPesos]*50)/100;
-        datos[index_SaldoPesos]-=(datos[index_FondoEmergencia]);
+        aFondo=(datos[index_SaldoPesos]*50)/100;
+        datos[index_SaldoPesos]-=aFondo;
+        datos[index_FondoEmergencia]+=aFondo;
         opcionesDeInversion(datos);
         break;
     case 4:
-        datos[index_FondoEmergencia]+=(datos[index_SaldoPesos]*25)/100;
-        datos[index_SaldoPesos]-=(datos[index_FondoEmergencia]);
+        aFondo=(datos[index_SaldoPesos]*25)/100;
+        datos[index_SaldoPesos]-=aFondo;
+        datos[index_FondoEmergencia]+=aFondo;
         opcionesDeInversion(datos);
         break;
     case 5:
@@ -391,8 +406,13 @@ void inversiones(double datos[])
 }
 void opcionesDeInversion(double datos[])
 {
-    int opcion;
+    int opcion=67;
+
+    while (opcion!=0){
     system("cls");
+    if(datos[index_SaldoPesos]<=0){
+        break;
+    }
     cout<<"usted tiene $"<<datos[index_SaldoPesos]<<" para invertir"<<endl;
     cout<<"elegir opcion:"<<endl;
     cout<<"1. dolares"<<endl;
@@ -416,12 +436,12 @@ void opcionesDeInversion(double datos[])
 
         break;
     }
-
-
+  }
 }
 void cartelInversion(double datos[], int opcion)
 {
     double plata=0;
+    double instrumento=0;
     string nombre_instrumento[3]=
     {
         "USD",
@@ -437,19 +457,14 @@ void cartelInversion(double datos[], int opcion)
         cout<<nombre_instrumento[opcion-1]<<": $"<<datos[opcion+5]<<endl;
         cout<<">> ";
         cin>>plata;
-        if (plata>=datos[opcion+5])
-        {
-            datos[index_SaldoPesos]-=plata;
-            datos[opcion+2]+=(plata/datos[opcion+5]);
-            cout<<"se ha comprado $"<<datos[opcion+2]<<" "<<nombre_instrumento[opcion-1]<<endl;
-            rlutil::msleep(2000);
+        if (plata<=0){
+            cout<<"Valor no valido."<<endl;
         }
-        else
-        {
-            cout<<""<<endl;
-            cout<<"cantidad de plata invalida"<<endl;
-            rlutil::msleep(1500);
-            system("cls");
-        }
+        datos[index_SaldoPesos]-=plata;
+        instrumento=(plata/datos[opcion+5]);
+        datos[opcion+2]+=instrumento;
+        cout<<"se ha comprado $"<<instrumento<<" "<<nombre_instrumento[opcion-1]<<endl;
+        rlutil::msleep(2000);
+        break;
     }
 }
