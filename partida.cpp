@@ -41,20 +41,32 @@ void jugarPartida(string nombre, int rondas)
         system("cls");
         cout<<"====================================="<<endl;
         cout<<"  MES "<<i<<"/"<<rondas<<"       Jugador: "<<nombre<<endl;
+        cout<<"====================================="<<endl;
         imprevistos(datosPartida);
         eventosFijos(i, datosPartida);
         cout<<"TENENCIAS ACTUALES: "<<endl;
         cout<<"Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
-        cout<<"Dolares: "<<datosPartida[index_Dolares]<<endl;
-        cout<<"Bitcoin: "<<datosPartida[index_BTC]<<endl;
+        cout<<"Dolares: $"<<datosPartida[index_Dolares]<<endl;
+        cout<<"Bitcoin: $"<<datosPartida[index_BTC]<<endl;
         cout<<"SP500: "<<datosPartida[index_SP500]<<endl;
         cout<<""<<endl;
         cout << "Sueldo: $" << datosPartida[index_Sueldo] << endl;
         cout << "Gastos fijos: $" << datosPartida[index_GastosFijos] << endl;
         cout << "Saldo final: $" << datosPartida[index_SaldoPesos] << endl;
         cout<<"====================================="<<endl;
-        aumentoPorInflacion(datosPartida);
         system("pause");
+        if(datosPartida[index_SaldoPesos]>0)
+        {
+            if(i!=rondas)
+            {
+                system("cls");
+                cout<<"====================================="<<endl;
+                cout<<"  MES "<<i<<"/"<<rondas<<"       Jugador: "<<nombre<<endl;
+                cout<<"====================================="<<endl;
+                inversiones(datosPartida);
+            }
+        }
+        aumentoPorInflacion(datosPartida);
     }
     mostrarResumen(datosPartida);
 }
@@ -144,9 +156,18 @@ void eventosFijos(int mes, double datos[])
         cout<<"Deposito de garantia"<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosAlquiler];
         break;
+    case 2:
+
+        break;
+    case 3:
+
+        break;
     case 4:
         cout<<"Aumento paritario"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        break;
+    case 5:
+
         break;
     case 6:
         cout<<"Aguinaldo"<<endl;
@@ -156,6 +177,9 @@ void eventosFijos(int mes, double datos[])
         cout<<"Aumento paritario"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
         break;
+    case 8:
+
+        break;
     case 9:
         cout<<"Actualizacion de alquiler"<<endl;
         datos[index_GastosAlquiler]=datos[index_GastosAlquiler]*1.4;
@@ -164,6 +188,9 @@ void eventosFijos(int mes, double datos[])
     case 10:
         cout<<"Aumento paritario"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        break;
+    case 11:
+
         break;
     case 12:
         cout<<"Aguinaldo"<<endl;
@@ -242,8 +269,14 @@ void imprevistos(double datos[])
     {
         cout<<"Sin imprevistos este mes."<<endl;
     }
-
-    datos[index_SaldoPesos]-=total_imprevistos;
+    else if (datos[index_FondoEmergencia]>=total_imprevistos)
+    {
+        datos[index_FondoEmergencia]-=total_imprevistos;
+    }
+    else
+    {
+        datos[index_SaldoPesos]-=total_imprevistos;
+    }
 }
 
 void aumentoAlquiler(int indice, double datos[])
@@ -268,7 +301,8 @@ void aumentoPorInflacion(double datos[])
     datos[index_InflacionAcumulada]*=1.07;
 }
 
-void mostrarResumen(double datos[]){
+void mostrarResumen(double datos[])
+{
     int resultado;
     double patrimonio=datos[index_SaldoPesos]+datos[index_FondoEmergencia];
     double patrimonioReal=patrimonio/datos[index_InflacionAcumulada];
@@ -278,11 +312,16 @@ void mostrarResumen(double datos[]){
     cout<<"Patrimonio nominal: $"<<patrimonio<<endl;
     cout<<"Patrimonio real: $"<<patrimonioReal<<endl;
     cout<<""<<endl;
-    if(patrimonioReal>500000*1.10){
+    if(patrimonioReal>500000*1.10)
+    {
         resultado=0;
-    }else if(patrimonioReal>=500000*0.90){
+    }
+    else if(patrimonioReal>=500000*0.90)
+    {
         resultado=1;
-    }else{
+    }
+    else
+    {
         resultado=2;
     }
     switch (resultado)
@@ -301,4 +340,116 @@ void mostrarResumen(double datos[]){
     }
     cout<<"====================================="<<endl;
     system("pause");
+}
+void inversiones(double datos[])
+{
+    int opcion;
+    cout<<"como preferis distribuir tu saldo restante?"<<endl;
+    cout<<"saldo: "<<datos[index_SaldoPesos]<<endl;
+    cout<<""<<endl;
+    cout<<"1. 0% inversion - 100% fondo emergencia"<<endl;
+    cout<<"2. 25% inversion - 75% fondo emergencia"<<endl;
+    cout<<"3. 50% inversion - 50% fondo emergencia"<<endl;
+    cout<<"4. 75% inversion - 25% fondo emergencia"<<endl;
+    cout<<"5. 100% inversion - 0% fondo emergencia"<<endl;
+    cout<<"0. no invertir"<<endl;
+    cout<<""<<endl;
+    cout<<">> ";
+    cin>>opcion;
+    switch (opcion)
+    {
+    case 1:
+        datos[index_FondoEmergencia]+=datos[index_SaldoPesos];
+        datos[index_SaldoPesos]-=datos[index_SaldoPesos];
+        break;
+    case 2:
+        datos[index_FondoEmergencia]+=(datos[index_SaldoPesos]*75)/100;
+        datos[index_SaldoPesos]-=(datos[index_FondoEmergencia]);
+        opcionesDeInversion(datos);
+        break;
+    case 3:
+        datos[index_FondoEmergencia]+=(datos[index_SaldoPesos]*50)/100;
+        datos[index_SaldoPesos]-=(datos[index_FondoEmergencia]);
+        opcionesDeInversion(datos);
+        break;
+    case 4:
+        datos[index_FondoEmergencia]+=(datos[index_SaldoPesos]*25)/100;
+        datos[index_SaldoPesos]-=(datos[index_FondoEmergencia]);
+        opcionesDeInversion(datos);
+        break;
+    case 5:
+        opcionesDeInversion(datos);
+        break;
+    case 0:
+
+        break;
+
+    default:
+
+        break;
+    }
+}
+void opcionesDeInversion(double datos[])
+{
+    int opcion;
+    system("cls");
+    cout<<"usted tiene $"<<datos[index_SaldoPesos]<<" para invertir"<<endl;
+    cout<<"elegir opcion:"<<endl;
+    cout<<"1. dolares"<<endl;
+    cout<<"2. btc"<<endl;
+    cout<<"3. S&P 500"<<endl;
+    cout<<"0. salir"<<endl;
+    cout<<">> ";
+    cin>>opcion;
+    switch (opcion)
+    {
+    case 1:
+        cartelInversion(datos, opcion);
+        break;
+    case 2:
+        cartelInversion(datos, opcion);
+        break;
+    case 3:
+        cartelInversion(datos, opcion);
+        break;
+    default:
+
+        break;
+    }
+
+
+}
+void cartelInversion(double datos[], int opcion)
+{
+    double plata=0;
+    string nombre_instrumento[3]=
+    {
+        "USD",
+        "BTC",
+        "S&P 500"
+    };
+    system ("cls");
+    while (plata<datos[opcion+5])             // "opcion + 5" accede al precio en el array. (1+5=6, accede a precio dolar. 2+5=7, accede a precio btc.)
+    {
+        cout<<"cuanto quiere invertir en "<<nombre_instrumento[opcion-1]<<"?"<<endl;
+        cout<<"(saldo: "<<datos[index_SaldoPesos]<<")"<<endl;
+        cout<<opcion<<endl;
+        cout<<nombre_instrumento[opcion-1]<<": $"<<datos[opcion+5]<<endl;
+        cout<<">> ";
+        cin>>plata;
+        if (plata>=datos[opcion+5])
+        {
+            datos[index_SaldoPesos]-=plata;
+            datos[opcion+2]+=(plata/datos[opcion+5]);
+            cout<<"se ha comprado $"<<datos[opcion+2]<<" "<<nombre_instrumento[opcion-1]<<endl;
+            rlutil::msleep(2000);
+        }
+        else
+        {
+            cout<<""<<endl;
+            cout<<"cantidad de plata invalida"<<endl;
+            rlutil::msleep(1500);
+            system("cls");
+        }
+    }
 }
