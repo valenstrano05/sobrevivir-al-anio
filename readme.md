@@ -20,6 +20,8 @@ EXTRAS
 
 -meter mas opciones de inversion (no se todavia)
 
+-añadir una seccion "diario" (funcion) donde se puede tocar una tecla para ingresar a ver cuanto subio o bajo el precio de los instrumentos durante el juego (se me ocurrio ahora, completamente innecesario pero capaz lo haga yo pq me gusta la idea)
+
 HECHO✅✅✅✅✅✅
 
 -eventos fijos e imprevistos
