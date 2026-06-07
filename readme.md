@@ -1,12 +1,10 @@
 TO DO
 
--hacer que al calculo del patrimonio real se le agregue las inversiones pasadas a pesos
-
 -hacer seccion de highscore (una vez terminada la logica del juego)
 
--dejar el codigo mas lindo (va bien, chequeamos cuando terminemos el juego)
+-añadir opción para vender tus inversiones
 
--añadir aumento de precio de instrumentos de inversión al pasar cada mes (puede ser una funcion nueva que se use dentro del switch de la funcion eventosFijos?)
+-dejar el codigo mas lindo (va bien, chequeamos cuando terminemos el juego)
 
 -arreglar error donde, en varios menus donde se pide un int, si se ingresa un valor que no sea int, el programa se rompe
 
@@ -29,3 +27,7 @@ HECHO✅✅✅✅✅✅
 -panel de estado
 
 -sistema de inversiones
+
+-hacer que al calculo del patrimonio real se le agregue las inversiones pasadas a pesos
+
+-añadir aumento de precio de instrumentos de inversión al pasar cada mes
