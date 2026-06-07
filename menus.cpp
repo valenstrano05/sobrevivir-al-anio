@@ -127,7 +127,7 @@ void crearPartidaNueva()
 
 int highscoreDeLaSesion()
 {
-
+    return 0; //a hacer
 }
 
 void glosarioFinanciero()
