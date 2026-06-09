@@ -10,23 +10,6 @@
 
 using namespace std;
 
-void glosario()
-{
-    cout<<"========================================================================="<<endl;
-    cout<<"                           GLOSARIO FINANCIERO                           "<<endl;
-    cout<<"========================================================================="<<endl;
-}
-
-void escribirLento(string texto, int velocidad)
-{
-    for(int i=0; i<texto.length(); i++)
-    {
-        cout<<texto[i];
-        cout.flush();
-        Sleep(velocidad);
-    }
-}
-
 void menuPrincipal(string nombre[], double patrimonioReal[])
 {
     int opcion=1;
@@ -47,13 +30,13 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
         cout<<" Ingrese una opción: ";
         cin>>entrada;
         try
-            {
-                opcion = stoi(entrada);
-            }
-            catch (...)
-            {
-                opcion = -1;
-            }
+        {
+            opcion = stoi(entrada);
+        }
+        catch (...)
+        {
+            opcion = -1;
+        }
         switch (opcion)
         {
         case 1:
@@ -61,10 +44,13 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
             contadorPartida++;
             break;
         case 2:
-            if(contadorPartida==0){
+            if(contadorPartida==0)
+            {
                 cout<<"Todavía no se jugaron partidas."<<endl;
-            }else{
-            highscoreDeLaSesion(patrimonioReal, nombre, contadorPartida);
+            }
+            else
+            {
+                highscoreDeLaSesion(patrimonioReal, nombre, contadorPartida);
             }
             system("pause");
             break;
@@ -102,77 +88,46 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
     }
 }
 
-
-void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioReal[])
-{
-    system("cls");
-    int rondas;
-    int velocidad=1;
-    cout<<"====================================="<<endl;
-    cout<<"            NUEVA PARTIDA            "<<endl;
-    cout<<"====================================="<<endl;
-    /*Sleep(500);
-    escribirLento(" Sistema: ¿Cómo es su nombre?", velocidad);
-    cout<<endl;
-    Sleep(700);
-    escribirLento(" ???: Yo me llamo... ", velocidad);*/
-    cin>>nombre[contadorPartida];
-    /*Sleep(400);
-    escribirLento(" Sistema: ¡Que lindo nombre! Bienvenido/a a mí juego, ", velocidad);
-    escribirLento(nombre, velocidad);
-    cout<<"."<<endl;
-    Sleep(400);
-    escribirLento(" Sistema: ¿Cuantas meses deseas jugar? Solo se puede de 1 a 12 rondas.", velocidad);
-    cout<<endl;
-    Sleep(400);
-    escribirLento(nombre, velocidad);
-    escribirLento(": ", velocidad);*/
-    cin>>rondas;
-    while(rondas<1||rondas>12)
-    {
-        /*escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", 50);
-        cout<<endl;
-        Sleep(400);
-        escribirLento(nombre, velocidad);
-        escribirLento(": ", velocidad);*/
-        cin>>rondas;
-    }
-
-    jugarPartida(contadorPartida, nombre, rondas, patrimonioReal);
-}
-
 void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorPartida)
 {
+    system("cls");
     int maximo=0;
-    cout<<"Partidas: "<<endl;
-    for(int i=0;i<contadorPartida;i++){
-        cout<<"Jugador:"<<nombre[i]<<endl;
-        cout<<"Patrimonio real de: "<<patrimonioReal[i]<<endl;
+    cout<<"=================================================="<<endl;
+    cout<<"                    HIGH SCORE                    "<<endl;
+    cout<<"=================================================="<<endl;
+    cout<<" Partidas jugadas: "<<contadorPartida<<endl;
+    for(int i=0; i<contadorPartida; i++)
+    {
+        cout<<" Jugador:"<<nombre[i]<<endl;
+        cout<<" Patrimonio real de: $"<<patrimonioReal[i]<<endl;
     }
 
-    for(int i=0;i<contadorPartida;i++){
-        if(i!=0){
-            if(patrimonioReal[i]>patrimonioReal[maximo]){
+    for(int i=0; i<contadorPartida; i++)
+    {
+        if(i!=0)
+        {
+            if(patrimonioReal[i]>patrimonioReal[maximo])
+            {
                 maximo=i;
             }
         }
     }
-    cout<<"---------------------------------------"<<endl;
-    cout<<"Jugador con High Score:"<<endl;
-    cout<<"Jugador:"<<nombre[maximo]<<endl;
-    cout<<"Patrimonio real de: "<<patrimonioReal[maximo]<<endl;
+    cout<<"--------------------------------------------------"<<endl;
+    cout<<" Jugador estrella:"<<nombre[maximo]<<endl;
+    cout<<" Patrimonio real de: $"<<patrimonioReal[maximo]<<endl;
+    cout<<"=================================================="<<endl;
 }
 
 void glosarioFinanciero()
 {
     int opcion;
     string entrada;
-    bool mostrarMenu=1; // flag para ayudar con la navegación de las páginas del glosario.
+    bool mostrarMenu=1;
     while(true)
     {
         if(mostrarMenu)
         {
-            rlutil::showcursor(); //vuelve a cargar el cursor, ya que al entrar a cualquier pagina del glosario se esconde el cursor.
+            rlutil::showcursor();
             system("cls");
             glosario();
             cout<<" 1. Costo de oportunidad"<<endl;
@@ -190,7 +145,7 @@ void glosarioFinanciero()
             cout<<""<<endl;
             cout<<" Ingrese una página: "<<endl;
             cout<<"=========================================================================";
-            rlutil::locate(22,17); //ubica el cursor en x22 y17.
+            rlutil::locate(22,17);
             cin >> entrada;
             try
             {
@@ -203,7 +158,7 @@ void glosarioFinanciero()
 
 
         }
-        mostrarMenu=1; // si se ingresa una opción invalida se vuelve a mostrar el menu.
+        mostrarMenu=1;
         if(opcion==0)
         {
             return;
@@ -300,19 +255,19 @@ void glosarioFinanciero()
         }
         if(opcion>0&&opcion<12)
         {
-            cout<<endl<<"    [<] Pág. Anterior   [>] Pág. Siguiente   [Esc] Volver al menu"<<endl;              //
-            cout<<"========================================================================="<<endl;            //
+            cout<<endl<<"    [<] Pág. Anterior   [>] Pág. Siguiente   [Esc] Volver al menu"<<endl;
+            cout<<"========================================================================="<<endl;
             rlutil::hidecursor(); // esconde el cursor.
-            int tecla=rlutil::getkey();                                                                         //
-            if(tecla==rlutil::KEY_LEFT)                                                                         // aca le pedi ayuda a claude. basicamente getkey() agarra una tecla
+            int tecla=rlutil::getkey();
+            if(tecla==rlutil::KEY_LEFT)
             {
-                opcion = (opcion > 1)?opcion-1:11;                                                              // y con un if comparo si es la tecla que quiero. si lo es, avanza o retrocede.
-                mostrarMenu=0;                                                                                  // si esta en la opcion 1 y retrocede, vuelve a la opcion 11. mismo con la opcion 11, vuelve a la 1.
+                opcion = (opcion > 1)?opcion-1:11;
+                mostrarMenu=0;
             }
-            else if(tecla==rlutil::KEY_RIGHT)                                                                   // ese (opcion<11)?opcion+1:1 es un else if resumido. si la opcion es menor a 11, la opcion suma 1.
+            else if(tecla==rlutil::KEY_RIGHT)
             {
-                opcion=(opcion<11)?opcion+1:1;                                                                  // si es mayor a 11, la opcion pasa a 1. (condición ? valor_si_verdadero : valor_si_falso)
-                mostrarMenu=0;                                                                                  //
+                opcion=(opcion<11)?opcion+1:1;
+                mostrarMenu=0;
             }
             else if(tecla==rlutil::KEY_ESCAPE)
             {

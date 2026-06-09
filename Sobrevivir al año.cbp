@@ -32,11 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="carteles.cpp" />
+		<Unit filename="economia.cpp" />
 		<Unit filename="funciones.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
-		<Unit filename="menus.cpp">
+		<Unit filename="menuPrincipal.cpp">
 			<Option target="Debug" />
 		</Unit>
 		<Unit filename="partida.cpp" />
