@@ -15,7 +15,8 @@ int main()
     srand(time(0));
     cout<<fixed<<setprecision(2);
     setlocale(LC_ALL,"");
-    string nombre;
+    string nombre[5];
+    double patrimonioReal[5];
     cout<<"====================================="<<endl;
     cout<<endl;
     cout<<"         SOBREVIVIR AL AÑO           "<<endl;
@@ -24,7 +25,7 @@ int main()
     cout<<endl;
     cout<<" Presione enter para continuar...";
     system("pause > nul");
-    menuPrincipal();
+    menuPrincipal(nombre, patrimonioReal);
 
     return 0;
 }

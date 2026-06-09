@@ -27,9 +27,11 @@ void escribirLento(string texto, int velocidad)
     }
 }
 
-void menuPrincipal()
+void menuPrincipal(string nombre[], double patrimonioReal[])
 {
     int opcion=1;
+    int contadorPartida=0;
+    string entrada;
     char salida;
     while(opcion!=0)
     {
@@ -43,23 +45,38 @@ void menuPrincipal()
         cout<<" 0. Salir"<<endl;
         cout<<"====================================="<<endl;
         cout<<" Ingrese una opción: ";
-        cin>>opcion;
+        cin>>entrada;
+        try
+            {
+                opcion = stoi(entrada);
+            }
+            catch (...)
+            {
+                opcion = -1;
+            }
         switch (opcion)
         {
         case 1:
-            crearPartidaNueva();
+            crearPartidaNueva(contadorPartida, nombre, patrimonioReal);
+            contadorPartida++;
             break;
         case 2:
-            highscoreDeLaSesion();
+            if(contadorPartida==0){
+                cout<<"Todavía no se jugaron partidas."<<endl;
+            }else{
+            highscoreDeLaSesion(patrimonioReal, nombre, contadorPartida);
+            }
+            system("pause");
             break;
         case 3:
             glosarioFinanciero();
             break;
+
         case 0:
-            /*escribirLento(" ¿Está seguro/a que quiere salir?", 40);
+            escribirLento(" ¿Está seguro/a que quiere salir?", 40);
             cout<<endl;
             escribirLento(" ¿s/n?", 40);
-            cout<<endl;*/
+            cout<<endl;
             cin>>salida;
             switch(salida)
             {
@@ -78,7 +95,7 @@ void menuPrincipal()
             }
             break;
         default:
-            escribirLento(" Opción inválida... Regresando al menú", 40);
+            escribirLento(" Opción inválida", 40);
             escribirLento("...", 500);
             break;
         }
@@ -86,10 +103,9 @@ void menuPrincipal()
 }
 
 
-void crearPartidaNueva()
+void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioReal[])
 {
     system("cls");
-    string nombre;
     int rondas;
     int velocidad=1;
     cout<<"====================================="<<endl;
@@ -100,7 +116,7 @@ void crearPartidaNueva()
     cout<<endl;
     Sleep(700);
     escribirLento(" ???: Yo me llamo... ", velocidad);*/
-    cin>>nombre;
+    cin>>nombre[contadorPartida];
     /*Sleep(400);
     escribirLento(" Sistema: ¡Que lindo nombre! Bienvenido/a a mí juego, ", velocidad);
     escribirLento(nombre, velocidad);
@@ -122,12 +138,29 @@ void crearPartidaNueva()
         cin>>rondas;
     }
 
-    jugarPartida(nombre, rondas);
+    jugarPartida(contadorPartida, nombre, rondas, patrimonioReal);
 }
 
-int highscoreDeLaSesion()
+void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorPartida)
 {
-    return 0; //a hacer
+    int maximo=0;
+    cout<<"Partidas: "<<endl;
+    for(int i=0;i<contadorPartida;i++){
+        cout<<"Jugador:"<<nombre[i]<<endl;
+        cout<<"Patrimonio real de: "<<patrimonioReal[i]<<endl;
+    }
+
+    for(int i=0;i<contadorPartida;i++){
+        if(i!=0){
+            if(patrimonioReal[i]>patrimonioReal[maximo]){
+                maximo=i;
+            }
+        }
+    }
+    cout<<"---------------------------------------"<<endl;
+    cout<<"Jugador con High Score:"<<endl;
+    cout<<"Jugador:"<<nombre[maximo]<<endl;
+    cout<<"Patrimonio real de: "<<patrimonioReal[maximo]<<endl;
 }
 
 void glosarioFinanciero()
@@ -159,13 +192,13 @@ void glosarioFinanciero()
             cout<<"=========================================================================";
             rlutil::locate(22,17); //ubica el cursor en x22 y17.
             cin >> entrada;
-            try                         //
+            try
             {
-                opcion = stoi(entrada); // stoi (string to integer) convierte el string a un entero, y copia ese entero a la variable opcion.
+                opcion = stoi(entrada);
             }
-            catch (...)                 // luego try prueba la opcion, y si fuese una opcion que devuelva error, catch lo atrapa antes de que el programa se rompa, y opcion se va a -1 para reiniciar.
+            catch (...)
             {
-                opcion = -1;            //
+                opcion = -1;
             }
 
 

@@ -32,7 +32,14 @@ const int index_InflacionAcumulada=20;
 
 using namespace std;
 
-void jugarPartida(string nombre, int rondas)
+void cartelJugador(int contadorPartida, string nombre[], int rondas, int i)
+{
+    cout<<"====================================="<<endl;
+    cout<<"  MES "<<i<<"/"<<rondas<<"       Jugador: "<<nombre[contadorPartida]<<endl;
+    cout<<"====================================="<<endl;
+}
+
+void jugarPartida(int contadorPartida, string nombre[], int rondas, double patrimonioReal[])
 {
     double datosPartida[21];
     int contadorRojo=0;
@@ -41,9 +48,7 @@ void jugarPartida(string nombre, int rondas)
     for(int i=1; i<=rondas; i++)
     {
         system("cls");
-        cout<<"====================================="<<endl;
-        cout<<"  MES "<<i<<"/"<<rondas<<"       Jugador: "<<nombre<<endl;
-        cout<<"====================================="<<endl;
+        cartelJugador(contadorPartida, nombre, rondas, i);
         imprevistos(datosPartida);
         eventosFijos(i, datosPartida);
         if (datosPartida[index_SaldoPesos]<0)
@@ -78,15 +83,12 @@ void jugarPartida(string nombre, int rondas)
             if(i!=rondas)
             {
                 system("cls");
-                cout<<"====================================="<<endl;
-                cout<<"  MES "<<i<<"/"<<rondas<<"       Jugador: "<<nombre<<endl;
-                cout<<"====================================="<<endl;
-                inversiones(datosPartida);
+                inversiones(contadorPartida, datosPartida, nombre, rondas, i);
             }
         }
         aumentoPorInflacion(datosPartida, rondas);
     }
-    mostrarResumen(datosPartida, gameOver);
+    mostrarResumen(contadorPartida, nombre, datosPartida, gameOver, patrimonioReal);
 }
 
 void cargarDatos (double datos[])
@@ -249,6 +251,7 @@ void eventosFijos(int mes, double datos[])
         break;
     }
     datos[index_SaldoPesos]+=datos[index_Sueldo];
+
 }
 
 
@@ -376,26 +379,30 @@ void aumentoPorInflacion(double datos[], int rondas)
     }
 }
 
-void mostrarResumen(double datos[], bool gameOver)
+void mostrarResumen(int contadorPartida, string nombre[], double datos[], bool gameOver, double patrimonioReal[])
 {
     int resultado;
     double patrimonio=datos[index_SaldoPesos]+datos[index_FondoEmergencia]+(datos[index_Dolares]*datos[index_PrecioDolar])+(datos[index_BTC]*datos[index_PrecioBTC])+(datos[index_SP500]*datos[index_PrecioSP500]);
-    double patrimonioReal=patrimonio/datos[index_InflacionAcumulada];
+    patrimonioReal[contadorPartida]=patrimonio/datos[index_InflacionAcumulada];
+
+    int posicionMax;
+
     system("cls");
     cout<<"====================================="<<endl;
     cout<<"           RESUMEN FINAL             "<<endl;
     cout<<"Patrimonio nominal: $"<<patrimonio<<endl;
-    cout<<"Patrimonio real: $"<<patrimonioReal<<endl;
+    cout<<"Patrimonio real: $"<<patrimonioReal[contadorPartida]<<endl;
     cout<<""<<endl;
+
     if(gameOver==1)
     {
         resultado=3;
     }
-    else if(patrimonioReal>650000*1.10)
+    else if(patrimonioReal[contadorPartida]>650000*1.10)
     {
         resultado=0;
     }
-    else if(patrimonioReal>=650000*0.90&&patrimonioReal<=650000*1.10)
+    else if(patrimonioReal[contadorPartida]>=650000*0.90&&patrimonioReal[contadorPartida]<=650000*1.10)
     {
         resultado=1;
     }
@@ -422,10 +429,12 @@ void mostrarResumen(double datos[], bool gameOver)
     cout<<"====================================="<<endl;
     system("pause");
 }
-void inversiones(double datos[])
+void inversiones(int contadorPartida, double datos[], string nombre[], int rondas, int i)
 {
     int opcion;
+    string entrada;
     int aFondo;
+    cartelJugador(contadorPartida, nombre, rondas, i);
     cout<<"como preferis distribuir tu saldo restante?"<<endl;
     cout<<"saldo: "<<datos[index_SaldoPesos]<<endl;
     cout<<""<<endl;
@@ -437,7 +446,15 @@ void inversiones(double datos[])
     cout<<"0. no invertir"<<endl;
     cout<<""<<endl;
     cout<<">> ";
-    cin>>opcion;
+    cin>>entrada;
+    try
+            {
+                opcion = stoi(entrada);
+            }
+            catch (...)
+            {
+                opcion = -1;
+            }
     switch (opcion)
     {
     case 1:
@@ -449,33 +466,37 @@ void inversiones(double datos[])
         aFondo=(datos[index_SaldoPesos]*75)/100;
         datos[index_SaldoPesos]-=aFondo;
         datos[index_FondoEmergencia]+=aFondo;
-        opcionesDeInversion(datos);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
         break;
     case 3:
         aFondo=(datos[index_SaldoPesos]*50)/100;
         datos[index_SaldoPesos]-=aFondo;
         datos[index_FondoEmergencia]+=aFondo;
-        opcionesDeInversion(datos);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
         break;
     case 4:
         aFondo=(datos[index_SaldoPesos]*25)/100;
         datos[index_SaldoPesos]-=aFondo;
         datos[index_FondoEmergencia]+=aFondo;
-        opcionesDeInversion(datos);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
         break;
     case 5:
-        opcionesDeInversion(datos);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
         break;
     case 0:
 
         break;
 
-    default:
+    case -1:
+        system("cls");
+        inversiones(contadorPartida, datos, nombre, rondas, i);
+        break;
 
+    default:
         break;
     }
 }
-void opcionesDeInversion(double datos[])
+void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], int rondas, int i)
 {
     int opcion=67;
 
@@ -484,6 +505,7 @@ void opcionesDeInversion(double datos[])
     if(datos[index_SaldoPesos]<=0){
         break;
     }
+    cartelJugador(contadorPartida, nombre, rondas, i);
     cout<<"usted tiene $"<<datos[index_SaldoPesos]<<" para invertir"<<endl;
     cout<<"elegir opcion:"<<endl;
     cout<<"1. dolares"<<endl;
@@ -495,21 +517,20 @@ void opcionesDeInversion(double datos[])
     switch (opcion)
     {
     case 1:
-        comprarInstrumento(datos, opcion);
+        comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
         break;
     case 2:
-        comprarInstrumento(datos, opcion);
+        comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
         break;
     case 3:
-        comprarInstrumento(datos, opcion);
+        comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
         break;
     default:
-
         break;
     }
   }
 }
-void comprarInstrumento(double datos[], int opcion)
+void comprarInstrumento(int contadorPartida, double datos[], int opcion, string nombre[], int rondas, int i)
 {
     double plata=0;
     double instrumento=0;
@@ -524,6 +545,7 @@ void comprarInstrumento(double datos[], int opcion)
         system ("cls");
         plata=0;
         rlutil::hidecursor();
+        cartelJugador(contadorPartida, nombre, rondas, i);
         cout<<"cuanto quiere invertir en "<<nombre_instrumento[opcion-1]<<"?"<<endl;
         cout<<"(saldo: "<<datos[index_SaldoPesos]<<")"<<endl;
         cout<<""<<endl;
@@ -544,9 +566,9 @@ void comprarInstrumento(double datos[], int opcion)
         }
         else if (tecla == rlutil::KEY_ENTER)
         {
-            rlutil::locate(1, 6);
+            rlutil::locate(1, 9);
             cout<<"                                     "<<endl;
-            rlutil::locate(4, 5);
+            rlutil::locate(4, 8);
             rlutil::showcursor();
             cin >> plata;
         }
