@@ -2,8 +2,6 @@ TO DO
 
 -decorar el juego con rlutil
 
--separar en otros .cpp el trabajo para que quede más organizado
-
 EXTRAS
 
 -añadir opción para vender tus inversiones
@@ -21,3 +19,5 @@ EXTRAS
 HECHO✅✅✅✅✅✅
 
 -todo lo relacionado a la logica hecho. el juego funciona correctamente.
+
+-separar en otros .cpp el trabajo para que quede más organizado
