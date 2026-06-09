@@ -1,14 +1,12 @@
 TO DO
 
--hacer seccion de highscore (una vez terminada la logica del juego)
+-decorar el juego con rlutil
 
--añadir opción para vender tus inversiones
-
--dejar el codigo mas lindo (va bien, chequeamos cuando terminemos el juego)
-
--arreglar error donde, en varios menus donde se pide un int, si se ingresa un valor que no sea int, el programa se rompe
+-separar en otros .cpp el trabajo para que quede más organizado
 
 EXTRAS
+
+-añadir opción para vender tus inversiones
 
 -agregar dificultades con distintos dialogos dependiendo al dificultad 
 
@@ -22,12 +20,4 @@ EXTRAS
 
 HECHO✅✅✅✅✅✅
 
--eventos fijos e imprevistos
-
--panel de estado
-
--sistema de inversiones
-
--hacer que al calculo del patrimonio real se le agregue las inversiones pasadas a pesos
-
--añadir aumento de precio de instrumentos de inversión al pasar cada mes
+-todo lo relacionado a la logica hecho. el juego funciona correctamente.
