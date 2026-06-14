@@ -1,6 +1,8 @@
 TO DO
 
--decorar el juego con rlutil
+-glosario accesible desde cualquier punto del juego
+
+-tips educativos
 
 EXTRAS
 
@@ -9,8 +11,6 @@ EXTRAS
 -agregar dificultades con distintos dialogos dependiendo al dificultad 
 
 -añadir tutorial opcional antes de iniciar juego
-
--decorar mas las interfaces con rlutil (definitivamente)
 
 -meter mas opciones de inversion (no se todavia)
 
@@ -21,3 +21,6 @@ HECHO✅✅✅✅✅✅
 -todo lo relacionado a la logica hecho. el juego funciona correctamente.
 
 -separar en otros .cpp el trabajo para que quede más organizado
+
+-decorar el juego con rlutil
+
