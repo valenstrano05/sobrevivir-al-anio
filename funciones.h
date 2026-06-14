@@ -4,6 +4,7 @@
 
 void jugarPartida(int contadorPartida, std::string nombre[], int rondas, double patrimonioReal[]);
 void escribirLento(std::string texto, int velocidad);
+void escribirLentoArcoiris(std::string texto, int velocidad);
 void menuPrincipal(std::string nombre[], double patrimonioReal[]);
 void crearPartidaNueva(int contadorPartida, std::string nombre[], double patrimonioReal[]);
 void highscoreDeLaSesion(double patrimonioReal[], std::string nombre[], int contadorPartida);
@@ -21,5 +22,7 @@ void comprarInstrumento(int contadorPartida, double datos[], int opcion, std::st
 void venderInstrumento(int contadorPartida, double datos[], int opcion, std::string nombre[], int rondas, int i);
 void comprarVender(int contadorPartida, double datos[], std::string nombre[], int rondas, int i);
 void cartelJugador(int contadorPartida, std::string nombre[], int rondas, int i);
+void cartelIntro(int contadorPartida, std::string nombre[], int rondas);
+
 
 #endif // FUNCIONES_H_INCLUDED
