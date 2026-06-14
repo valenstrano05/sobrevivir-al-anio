@@ -35,36 +35,53 @@ using namespace std;
 void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioReal[])
 {
     system("cls");
-    int rondas;
-    int velocidad=1;
+    int rondas=0;
+    string entrada;
+    int velocidad=50;
     cout<<"====================================="<<endl;
     cout<<"            NUEVA PARTIDA            "<<endl;
     cout<<"====================================="<<endl;
-    /*Sleep(500);
+    Sleep(100);
     escribirLento(" Sistema: ¿Cómo es su nombre?", velocidad);
     cout<<endl;
-    Sleep(700);
-    escribirLento(" ???: Yo me llamo... ", velocidad);*/
+    Sleep(100);
+    escribirLento(" ???: Yo me llamo... ", velocidad);
     cin>>nombre[contadorPartida];
-    /*Sleep(400);
+    Sleep(100);
     escribirLento(" Sistema: ¡Que lindo nombre! Bienvenido/a a mí juego, ", velocidad);
-    escribirLento(nombre, velocidad);
+    escribirLento(nombre[contadorPartida], velocidad);
     cout<<"."<<endl;
-    Sleep(400);
-    escribirLento(" Sistema: ¿Cuantas meses deseas jugar? Solo se puede de 1 a 12 rondas.", velocidad);
+    Sleep(100);
+    escribirLento(" Sistema: ¿Cuantos meses desea jugar? Solo se puede de 1 a 12 rondas.", velocidad);
     cout<<endl;
-    Sleep(400);
-    escribirLento(nombre, velocidad);
-    escribirLento(": ", velocidad);*/
-    cin>>rondas;
+    Sleep(100);
+    cout<<" ";
+    escribirLento(nombre[contadorPartida], velocidad);
+    escribirLento(": ", velocidad);
     while(rondas<1||rondas>12)
     {
-        /*escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", 50);
+        cin>>entrada;
+        try
+        {
+            rondas = stoi(entrada);
+        }
+        catch (...)
+        {
+            rondas = -1;
+        }
+        if (rondas<1||rondas>12){
+        escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", velocidad);
         cout<<endl;
-        Sleep(400);
-        escribirLento(nombre, velocidad);
-        escribirLento(": ", velocidad);*/
-        cin>>rondas;
+        Sleep(100);
+        cout<<" ";
+        escribirLento(nombre[contadorPartida], velocidad);
+        escribirLento(": ", velocidad);
+        }else
+        {
+            escribirLento(" Sistema: Excelente. Comencemos...", velocidad);
+            cout<<endl;
+            Sleep(500);
+        }
     }
 
     jugarPartida(contadorPartida, nombre, rondas, patrimonioReal);
@@ -75,13 +92,15 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
     double datosPartida[21];
     int contadorRojo=0;
     bool gameOver=0;
+    int velocidad=50;
+    double saldoInicial;
     cargarDatos(datosPartida);
+    system("cls");
+    Sleep(400);
+    cartelIntro(contadorPartida, nombre, rondas);
     for(int i=1; i<=rondas; i++)
     {
-        system("cls");
-        cartelJugador(contadorPartida, nombre, rondas, i);
-        imprevistos(datosPartida);
-        eventosFijos(i, datosPartida);
+
         if (datosPartida[index_SaldoPesos]<0)
         {
             contadorRojo++;
@@ -90,17 +109,39 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
         {
             contadorRojo=0;
         }
-        cout<<"TENENCIAS ACTUALES: "<<endl;
-        cout<<"Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
-        cout<<"Dolares: $"<<datosPartida[index_Dolares]<<endl;
-        cout<<"Bitcoin: $"<<datosPartida[index_BTC]<<endl;
-        cout<<"SP500: "<<datosPartida[index_SP500]<<endl;
-        cout<<"-------------------------------------"<<endl;
-        cout << "Sueldo: $" << datosPartida[index_Sueldo] << endl;
-        cout << "Gastos fijos: $" << datosPartida[index_GastosFijos] << endl;
-        cout << "Saldo final: $" << datosPartida[index_SaldoPesos] << endl;
-        cout<<"====================================="<<endl;
-        system("pause");
+        int tecla;
+        do
+        {
+            system("cls");
+            cartelJugador(contadorPartida, nombre, rondas, i);
+            cout<<"EVENTOS FIJOS: "<<endl;
+            eventosFijos(i, datosPartida);
+            cout<<"-------------------------------------"<<endl;
+            cout<<"IMPREVISTOS: "<<endl;
+            imprevistos(datosPartida);
+            cout<<"-------------------------------------"<<endl;
+            cout<<"TENENCIAS ACTUALES: "<<endl;
+            cout<<"Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
+            cout<<"Dolares: $"<<datosPartida[index_Dolares]<<endl;
+            cout<<"Bitcoin: $"<<datosPartida[index_BTC]<<endl;
+            cout<<"SP500: "<<datosPartida[index_SP500]<<endl;
+            cout<<"-------------------------------------"<<endl;
+            cout<<"Saldo inicial: $"<<saldoInicial<<endl;
+            cout<< "Sueldo: $"<<datosPartida[index_Sueldo]<<endl;
+            cout<< "Gastos fijos: $"<<datosPartida[index_GastosFijos]<<endl;
+            cout<< "Saldo final: $"<<datosPartida[index_SaldoPesos]<<endl;
+            cout<<"====================================="<<endl;
+            cout<<"[G] Glosario"<<endl;
+            cout<<"Presione cualquier tecla para continuar."<<endl;
+
+            tecla = getch();
+
+            if (tecla=='g' || tecla=='G')
+            {
+                glosarioFinanciero();
+            }
+
+        } while (tecla=='g' || tecla=='G');
         if (contadorRojo>2)
         {
             gameOver=1;
@@ -195,6 +236,7 @@ void inversiones(int contadorPartida, double datos[], string nombre[], int ronda
 void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], int rondas, int i)
 {
     int opcion=67;
+    string entrada;
 
     while (opcion!=0)
     {
@@ -211,7 +253,15 @@ void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], i
         cout<<"3. S&P 500"<<endl;
         cout<<"0. salir"<<endl;
         cout<<">> ";
-        cin>>opcion;
+        cin>>entrada;
+        try
+        {
+            opcion = stoi(entrada);
+        }
+        catch (...)
+        {
+            opcion = -1;
+        }
         switch (opcion)
         {
         case 1:
@@ -268,6 +318,8 @@ void comprarInstrumento(int contadorPartida, double datos[], int opcion, string 
         else if (tecla == rlutil::KEY_ENTER)
         {
             rlutil::locate(1, 9);
+            cout<<"                                     "<<endl;
+            rlutil::locate(1, 10);
             cout<<"                                     "<<endl;
             rlutil::locate(4, 8);
             rlutil::showcursor();
