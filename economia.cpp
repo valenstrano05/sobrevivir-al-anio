@@ -118,20 +118,26 @@ void eventosFijos(int mes, double datos[])
         datos[index_SaldoPesos]+=150000;
         cout<<"Deposito de garantia: -$180000"<<endl;
         datos[index_SaldoPesos]-=180000;
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 2:
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 3:
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 4:
         cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
+        cout<<"(+$"<<datos[index_Sueldo]*0.15<<" al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 5:
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 6:
@@ -146,13 +152,16 @@ void eventosFijos(int mes, double datos[])
             cout<<"BTC rompio el piso... (disminución del 50%)"<<endl;
             datos[index_PrecioBTC]*=0.50;
         }
-        cout<<"Aguinaldo"<<endl;
+        cout<<"¡Llego el aguinaldo!"<<endl;
+        cout<<"(+$"<<datos[index_Sueldo]*0.50<<" este mes"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 7:
         cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 8:
@@ -162,11 +171,13 @@ void eventosFijos(int mes, double datos[])
         cout<<"Actualizacion de alquiler"<<endl;
         datos[index_GastosAlquiler]=datos[index_GastosAlquiler]*1.4;
         datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 10:
         cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 11:
@@ -181,11 +192,13 @@ void eventosFijos(int mes, double datos[])
             cout<<"BTC rompio el piso... (disminución del 50%)"<<endl;
             datos[index_PrecioBTC]*=0.50;
         }
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 12:
         cout<<"Aguinaldo"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
+        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     default:
@@ -262,6 +275,7 @@ void imprevistos(double datos[])
     }
     else if (datos[index_FondoEmergencia]>=totalImprevistos)
     {
+        cout<<"(Tu fondo lo pudo cubrir...)"<<endl;
         datos[index_FondoEmergencia]-=totalImprevistos;
     }
     else
