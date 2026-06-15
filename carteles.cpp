@@ -12,7 +12,8 @@ using namespace std;
 
 void escribirLentoArcoiris(string texto, int velocidad)
 {
-    int colores[] = {
+    int colores[] =
+    {
         rlutil::RED,
         rlutil::YELLOW,
         rlutil::GREEN,
@@ -104,30 +105,46 @@ void cartelIntro(int contadorPartida, string nombre[], int rondas)
     cout<<endl;
     Sleep(400);
 
-    escribirLento("La fecha es 16 de Enero.", 40); cout<<endl;
+    escribirLento(" La fecha es 16 de Enero.", 40);
+    cout<<endl;
     Sleep(300);
-    escribirLento("Luego de una larga búsqueda,", 40);Sleep(200);
-    escribirLento(" lograste",40);cout<<endl;
-    escribirLento("conseguir tu primer empleo y por fin", 40);cout<<endl;
-    escribirLento("podrás independizarte.", 40);cout<<endl;
-    Sleep(300);
-    cout<<""<<endl;
-    escribirLento("Aparte de tu sueldo de $500000, ", 40);Sleep(200);
-    escribirLento("tus",40);cout<<endl;
-    escribirLento("viejos te dieron $150000 para ayudarte",40);cout<<endl;
-    escribirLento("en tus primeros meses en el mundo real.",40);cout<<endl;
-    Sleep(300);
-    cout<<""<<endl;
-    escribirLento("Al irte de casa, ",40);Sleep(200);
-    escribirLento("te despiden deseandote",40);cout<<endl;
-    escribirLento("mucha suerte. ",40);Sleep(300);
-    escribirLento("La necesitarás.",40);cout<<endl;
+    escribirLento(" Luego de una larga búsqueda,", 40);
+    Sleep(200);
+    escribirLento(" lograste",40);
+    cout<<endl;
+    escribirLento(" conseguir tu primer empleo y por fin", 40);
+    cout<<endl;
+    escribirLento(" podrás independizarte.", 40);
+    cout<<endl;
     Sleep(300);
     cout<<""<<endl;
-    escribirLento("SALDO INICIAL: ",40);Sleep(300);
-    cout<<"$650000";Sleep(600);cout<<endl;
+    escribirLento(" Aparte de tu sueldo de $500000, ", 40);
+    Sleep(200);
+    escribirLento("tus",40);
+    cout<<endl;
+    escribirLento(" viejos te dieron $150000 para ayudarte",40);
+    cout<<endl;
+    escribirLento(" en tus primeros meses en el mundo real.",40);
+    cout<<endl;
+    Sleep(300);
     cout<<""<<endl;
-    escribirLento("Presiona [Enter] para comenzar.",80);
+    escribirLento(" Al irte de casa, ",40);
+    Sleep(200);
+    escribirLento("te despiden deseandote",40);
+    cout<<endl;
+    escribirLento(" mucha suerte. ",40);
+    Sleep(300);
+    escribirLento("La necesitarás.",40);
+    cout<<endl;
+    Sleep(300);
+    cout<<""<<endl;
+    escribirLento(" SALDO INICIAL: ",40);
+    Sleep(300);
+    cout<<"$650000";
+    Sleep(600);
+    cout<<endl;
+    cout<<""<<endl;
+    escribirLento(" Presiona [Enter] para comenzar",80);
     system("pause > nul");
     rlutil::showcursor();
 }

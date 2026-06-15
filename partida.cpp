@@ -48,7 +48,7 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
     escribirLento(" ???: Yo me llamo... ", velocidad);
     cin>>nombre[contadorPartida];
     Sleep(100);
-    escribirLento(" Sistema: ¡Que lindo nombre! Bienvenido/a a mí juego, ", velocidad);
+    escribirLento(" Sistema: ¡Que buen nombre! Bienvenido/a a mí juego, ", velocidad);
     escribirLento(nombre[contadorPartida], velocidad);
     cout<<"."<<endl;
     Sleep(100);
@@ -69,14 +69,16 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
         {
             rondas = -1;
         }
-        if (rondas<1||rondas>12){
-        escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", velocidad);
-        cout<<endl;
-        Sleep(100);
-        cout<<" ";
-        escribirLento(nombre[contadorPartida], velocidad);
-        escribirLento(": ", velocidad);
-        }else
+        if (rondas<1||rondas>12)
+        {
+            escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", velocidad);
+            cout<<endl;
+            Sleep(100);
+            cout<<" ";
+            escribirLento(nombre[contadorPartida], velocidad);
+            escribirLento(": ", velocidad);
+        }
+        else
         {
             escribirLento(" Sistema: Excelente. Comencemos...", velocidad);
             cout<<endl;
@@ -114,25 +116,25 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
         {
             system("cls");
             cartelJugador(contadorPartida, nombre, rondas, i);
-            cout<<"EVENTOS FIJOS: "<<endl;
+            cout<<" EVENTOS FIJOS: "<<endl;
             eventosFijos(i, datosPartida);
             cout<<"-------------------------------------"<<endl;
-            cout<<"IMPREVISTOS: "<<endl;
+            cout<<" IMPREVISTOS: "<<endl;
             imprevistos(datosPartida);
             cout<<"-------------------------------------"<<endl;
-            cout<<"TENENCIAS ACTUALES: "<<endl;
-            cout<<"Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
-            cout<<"Dolares: $"<<datosPartida[index_Dolares]<<endl;
-            cout<<"Bitcoin: $"<<datosPartida[index_BTC]<<endl;
-            cout<<"SP500: "<<datosPartida[index_SP500]<<endl;
+            cout<<" TENENCIAS ACTUALES: "<<endl;
+            cout<<" Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
+            cout<<" Dolares: $"<<datosPartida[index_Dolares]<<endl;
+            cout<<" Bitcoin: $"<<datosPartida[index_BTC]<<endl;
+            cout<<" SP500: "<<datosPartida[index_SP500]<<endl;
             cout<<"-------------------------------------"<<endl;
-            cout<<"Saldo inicial: $"<<saldoInicial<<endl;
+            cout<<" Saldo inicial: $"<<saldoInicial<<endl;
             cout<< "Sueldo: $"<<datosPartida[index_Sueldo]<<endl;
             cout<< "Gastos fijos: $"<<datosPartida[index_GastosFijos]<<endl;
             cout<< "Saldo final: $"<<datosPartida[index_SaldoPesos]<<endl;
             cout<<"====================================="<<endl;
-            cout<<"[G] Glosario"<<endl;
-            cout<<"Presione cualquier tecla para continuar."<<endl;
+            cout<<" [G] Glosario"<<endl;
+            cout<<" Presione cualquier tecla para continuar."<<endl;
 
             tecla = getch();
 
@@ -141,7 +143,8 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
                 glosarioFinanciero();
             }
 
-        } while (tecla=='g' || tecla=='G');
+        }
+        while (tecla=='g' || tecla=='G');
         if (contadorRojo>2)
         {
             gameOver=1;
@@ -170,15 +173,14 @@ void inversiones(int contadorPartida, double datos[], string nombre[], int ronda
     string entrada;
     int aFondo;
     cartelJugador(contadorPartida, nombre, rondas, i);
-    cout<<"como preferis distribuir tu saldo restante?"<<endl;
-    cout<<"saldo: "<<datos[index_SaldoPesos]<<endl;
+    cout<<"¿Cómo desea distribuir su saldo restante?"<<endl;
+    cout<<"Saldo: "<<datos[index_SaldoPesos]<<endl;
     cout<<""<<endl;
     cout<<"1. 0% inversion - 100% fondo emergencia"<<endl;
     cout<<"2. 25% inversion - 75% fondo emergencia"<<endl;
     cout<<"3. 50% inversion - 50% fondo emergencia"<<endl;
     cout<<"4. 75% inversion - 25% fondo emergencia"<<endl;
     cout<<"5. 100% inversion - 0% fondo emergencia"<<endl;
-    cout<<"0. no invertir"<<endl;
     cout<<""<<endl;
     cout<<">> ";
     cin>>entrada;
@@ -218,10 +220,6 @@ void inversiones(int contadorPartida, double datos[], string nombre[], int ronda
     case 5:
         opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
         break;
-    case 0:
-
-        break;
-
     case -1:
         system("cls");
         inversiones(contadorPartida, datos, nombre, rondas, i);
@@ -381,10 +379,10 @@ void mostrarResumen(int contadorPartida, string nombre[], double datos[], bool g
     switch (resultado)
     {
     case 0:
-        cout<<"¡Felicidades, le ganaste a la inflacion!";
+        cout<<"¡Felicidades, le ganaste a la inflacion!"<<endl;
         break;
     case 1:
-        cout<<"Le empataste a la inflacion. Podría haber sido peor...";
+        cout<<"Le empataste a la inflacion. Podría haber sido peor..."<<endl;
         break;
     case 2:
         cout<<"Que desastre... Te comió la inflación..."<<endl;

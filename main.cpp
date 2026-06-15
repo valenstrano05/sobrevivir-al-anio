@@ -12,7 +12,7 @@ using namespace std;
 
 int main()
 {
-    int velocidad=50;
+    int velocidad=10;
     srand(time(0));
     cout<<fixed<<setprecision(2);
     setlocale(LC_ALL,"");
@@ -29,7 +29,7 @@ int main()
     cout<<endl;
     cout<<endl;
     rlutil::setColor(rlutil::WHITE);
-    escribirLento("     Presione [Enter] para jugar", velocidad);
+    escribirLento(" Presione [Enter] para jugar", velocidad);
     system("pause > nul");
     menuPrincipal(nombre, patrimonioReal);
 

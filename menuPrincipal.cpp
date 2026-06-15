@@ -63,6 +63,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
             cout<<endl;
             escribirLento(" ¿s/n?", 40);
             cout<<endl;
+            rlutil::locate(8, 11);
             cin>>salida;
             switch(salida)
             {
@@ -98,7 +99,7 @@ void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorP
     cout<<" Partidas jugadas: "<<contadorPartida<<endl;
     for(int i=0; i<contadorPartida; i++)
     {
-        cout<<" Jugador:"<<nombre[i]<<endl;
+        cout<<" Jugador: "<<nombre[i]<<endl;
         cout<<" Patrimonio real de: $"<<patrimonioReal[i]<<endl;
     }
 
@@ -113,7 +114,7 @@ void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorP
         }
     }
     cout<<"--------------------------------------------------"<<endl;
-    cout<<" Jugador estrella:"<<nombre[maximo]<<endl;
+    cout<<" Jugador estrella: "<<nombre[maximo]<<endl;
     cout<<" Patrimonio real de: $"<<patrimonioReal[maximo]<<endl;
     cout<<"=================================================="<<endl;
 }
