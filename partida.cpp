@@ -7,6 +7,7 @@
 #include <ctime>
 #include "rlutil.h"
 #include <iomanip>
+#include <conio.h>
 
 const int index_Sueldo=0;
 const int index_SaldoPesos=1;
@@ -37,22 +38,23 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
     system("cls");
     int rondas=0;
     string entrada;
-    int velocidad=50;
+    char salida;
+    int velocidad=15;
     cout<<"====================================="<<endl;
     cout<<"            NUEVA PARTIDA            "<<endl;
     cout<<"====================================="<<endl;
     Sleep(100);
-    escribirLento(" Sistema: �C�mo es su nombre?", velocidad);
+    escribirLento(" Sistema: ¿Cómo es su nombre?", velocidad);
     cout<<endl;
     Sleep(100);
     escribirLento(" ???: Yo me llamo... ", velocidad);
     cin>>nombre[contadorPartida];
     Sleep(100);
-    escribirLento(" Sistema: �Que buen nombre! Bienvenido/a a m� juego, ", velocidad);
+    escribirLento(" Sistema: ¡Que lindo nombre! Bienvenido/a a mí juego, ", velocidad);
     escribirLento(nombre[contadorPartida], velocidad);
     cout<<"."<<endl;
     Sleep(100);
-    escribirLento(" Sistema: �Cuantos meses desea jugar? Solo se puede de 1 a 12 rondas.", velocidad);
+    escribirLento(" Sistema: ¿Cuantos meses desea jugar? Solo se puede de 1 a 12 rondas.", velocidad);
     cout<<endl;
     Sleep(100);
     cout<<" ";
@@ -71,7 +73,7 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
         }
         if (rondas<1||rondas>12)
         {
-            escribirLento(" Sistema: La cantidad de rondas es inv�lida. Por favor, ingresela nuevamente.", velocidad);
+            escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", velocidad);
             cout<<endl;
             Sleep(100);
             cout<<" ";
@@ -80,8 +82,30 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
         }
         else
         {
-            escribirLento(" Sistema: Excelente. Comencemos...", velocidad);
-            cout<<endl;
+            bool verdadero=true;
+            while(verdadero)
+            {
+                escribirLento(" Sistema: Excelente. Desea ver un tutorial antes de comenzar? (s/n)", velocidad);
+                cout<<endl;
+                cout<<" ";
+                escribirLento(nombre[contadorPartida], velocidad);
+                escribirLento(": ", velocidad);
+                cin>>salida;
+                switch (salida)
+                {
+                case 's':
+                    tutorial();
+                    verdadero=false;
+                    break;
+                case 'n':
+                    escribirLento(" Sistema: Muy bien. Comencemos...", velocidad);
+                    verdadero=false;
+                    break;
+
+                default:
+                    break;
+                }
+            }
             Sleep(500);
         }
     }
@@ -94,15 +118,13 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
     double datosPartida[21];
     int contadorRojo=0;
     bool gameOver=0;
-    int velocidad=50;
-    double saldoInicial;
     cargarDatos(datosPartida);
     system("cls");
     Sleep(400);
     cartelIntro(contadorPartida, nombre, rondas);
     for(int i=1; i<=rondas; i++)
     {
-
+        rlutil::hidecursor();
         if (datosPartida[index_SaldoPesos]<0)
         {
             contadorRojo++;
@@ -111,76 +133,170 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
         {
             contadorRojo=0;
         }
+        if(contadorRojo>2)
+        {
+            if(datosPartida[index_Dolares]>0||datosPartida[index_BTC]>0||datosPartida[index_SP500]>0)
+            {
+                datosPartida[index_SaldoPesos]+=datosPartida[index_Dolares]*datosPartida[index_PrecioDolar];
+                datosPartida[index_SaldoPesos]+=datosPartida[index_BTC]*datosPartida[index_PrecioBTC];
+                datosPartida[index_SaldoPesos]+=datosPartida[index_SP500]*datosPartida[index_PrecioSP500];
+                datosPartida[index_Dolares]-=datosPartida[index_Dolares];
+                datosPartida[index_BTC]-=datosPartida[index_BTC];
+                datosPartida[index_SP500]-=datosPartida[index_SP500];
+
+
+                if(datosPartida[index_SaldoPesos]>0)
+                {
+                    system("cls");
+                    cartelJugador(contadorPartida, nombre, rondas, i);
+                    cout<<" Se vendieron tus inversiones para "<<endl;
+                    cout<<" mantenerte a flote... ≡(▔﹏▔)≡"<<endl;
+                    cout<<" Tu saldo actual es: $"<<datosPartida[index_SaldoPesos]<<endl;
+                    cout<<"=====================================";
+                    system("pause > nul");
+                    contadorRojo=0;
+                }
+            }
+            else
+            {
+                gameOver=1;
+            }
+            if (gameOver==1)
+            {
+                break;
+            }
+        }
         int tecla;
         do
         {
             system("cls");
-            cartelJugador(contadorPartida, nombre, rondas, i);
-            cout<<" EVENTOS FIJOS: "<<endl;
+            cout<<" ======================================"<<endl;
+            cout<<"|  MES "<<i<<"/"<<rondas<<endl;
+            rlutil::locate(40, 2);
+            cout<<"|"<<endl;
+            cout<<"|  JUGADOR: "<<nombre[contadorPartida]<<endl;
+            rlutil::locate(40, 3);
+            cout<<"|"<<endl;
+            cout<<" ======================================"<<endl;
+            cout<<"             ~EVENTOS FIJOS~            "<<endl;
             eventosFijos(i, datosPartida);
-            cout<<"-------------------------------------"<<endl;
-            cout<<" IMPREVISTOS: "<<endl;
+            cout<<" -------------------------------------"<<endl;
+            cout<<"              ~IMPREVISTOS~             "<<endl;
             imprevistos(datosPartida);
-            cout<<"-------------------------------------"<<endl;
-            cout<<" TENENCIAS ACTUALES: "<<endl;
-            cout<<" Fondo de emergencias: "<<datosPartida[index_FondoEmergencia]<<endl;
-            cout<<" Dolares: $"<<datosPartida[index_Dolares]<<endl;
-            cout<<" Bitcoin: $"<<datosPartida[index_BTC]<<endl;
-            cout<<" SP500: "<<datosPartida[index_SP500]<<endl;
-            cout<<"-------------------------------------"<<endl;
-            cout<<" Saldo inicial: $"<<saldoInicial<<endl;
-            cout<< "Sueldo: $"<<datosPartida[index_Sueldo]<<endl;
-            cout<< "Gastos fijos: $"<<datosPartida[index_GastosFijos]<<endl;
-            cout<< "Saldo final: $"<<datosPartida[index_SaldoPesos]<<endl;
-            cout<<"====================================="<<endl;
+            cout<<" -------------------------------------"<<endl;
+            cout<<"           ~TENENCIAS ACTUALES~          "<<endl;
+            cout<<"  Fondo de emergencias: $"<<datosPartida[index_FondoEmergencia]<<endl;
+            cout<<"  Dolares: $"<<datosPartida[index_Dolares]<<endl;
+            cout<<"  Bitcoin: $"<<datosPartida[index_BTC]<<endl;
+            cout<<"  SP500: "<<datosPartida[index_SP500]<<endl;
+            cout<<" -------------------------------------"<<endl;
+            cout<<"            ~RESUMEN DEL MES~            "<<endl;
+            cout<<"  Sueldo: $"<<datosPartida[index_Sueldo]<<endl;
+            cout<<"  Gastos fijos: $"<<datosPartida[index_GastosFijos]<<endl;
+            cout<<"  Saldo final: $"<<datosPartida[index_SaldoPesos]<<endl;
+            tipsEducativos(i);
+            cout<<" ====================================="<<endl;
             cout<<" [G] Glosario"<<endl;
             cout<<" Presione cualquier tecla para continuar."<<endl;
-
             tecla = getch();
 
             if (tecla=='g' || tecla=='G')
             {
+                rlutil::showcursor();
                 glosarioFinanciero();
             }
 
         }
         while (tecla=='g' || tecla=='G');
-        if (contadorRojo>2)
-        {
-            gameOver=1;
-        }
-        if (gameOver==1)
-        {
-            break;
-        }
         if(datosPartida[index_SaldoPesos]>0)
         {
             if(i!=rondas)
             {
-                system("cls");
-                inversiones(contadorPartida, datosPartida, nombre, rondas, i);
+                if (datosPartida[index_BTC]==0&&datosPartida[index_Dolares]==0&&datosPartida[index_SP500]==0)
+                {
+                    bool vender=false;
+                    rlutil::showcursor();
+                    inversiones(contadorPartida, datosPartida, nombre, rondas, i, vender);
+                }
+                else
+                {
+                    system("cls");
+                    rlutil::showcursor();
+                    comprarVender(contadorPartida, datosPartida, nombre, rondas, i);
+                }
             }
         }
         aumentoPorInflacion(datosPartida, rondas);
+        rlutil::showcursor();
     }
     mostrarResumen(contadorPartida, nombre, datosPartida, gameOver, patrimonioReal);
+    rlutil::showcursor();
 }
 
+void comprarVender(int contadorPartida, double datos[], std::string nombre[], int rondas, int i)
+{
+    bool vender=false;
+    string entrada;
+    int opcion;
 
-void inversiones(int contadorPartida, double datos[], string nombre[], int rondas, int i)
+    system("cls");
+    cartelJugador(contadorPartida, nombre, rondas, i);
+    cout<<" ¿Como desea continuar?"<<endl;
+    cout<<" Saldo: "<<datos[index_SaldoPesos]<<endl;
+    cout<<""<<endl;
+    cout<<" Dolares: $"<<datos[index_Dolares]<<endl;
+    cout<<" Bitcoin: $"<<datos[index_BTC]<<endl;
+    cout<<" SP500: "<<datos[index_SP500]<<endl;
+    cout<<"-------------------------------------"<<endl;
+    cout<<" 1. Comprar"<<endl;
+    cout<<" 2. Vender"<<endl;
+    cout<<" 3. Glosario"<<endl;
+    cout<<" 0. Salir"<<endl;
+    cin>>entrada;
+    try
+    {
+        opcion = stoi(entrada);
+    }
+    catch (...)
+    {
+        opcion = -1;
+    }
+    switch (opcion)
+    {
+    case 1:
+        inversiones(contadorPartida, datos, nombre, rondas, i, vender);
+        break;
+    case 2:
+        vender=true;
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i, vender);
+        break;
+    case 3:
+        glosarioFinanciero();
+        comprarVender(contadorPartida, datos, nombre, rondas, i);
+        break;
+    default:
+        break;
+    }
+
+}
+
+void inversiones(int contadorPartida, double datos[], string nombre[], int rondas, int i, bool vender)
 {
     int opcion;
     string entrada;
     int aFondo;
+    system("cls");
     cartelJugador(contadorPartida, nombre, rondas, i);
-    cout<<"�C�mo desea distribuir su saldo restante?"<<endl;
-    cout<<"Saldo: "<<datos[index_SaldoPesos]<<endl;
+    cout<<" ¿Como prefiere distribuir su saldo restante?"<<endl;
+    cout<<" Saldo actual: $"<<datos[index_SaldoPesos]<<endl;
     cout<<""<<endl;
-    cout<<"1. 0% inversion - 100% fondo emergencia"<<endl;
-    cout<<"2. 25% inversion - 75% fondo emergencia"<<endl;
-    cout<<"3. 50% inversion - 50% fondo emergencia"<<endl;
-    cout<<"4. 75% inversion - 25% fondo emergencia"<<endl;
-    cout<<"5. 100% inversion - 0% fondo emergencia"<<endl;
+    cout<<" 1. 0% inversion - 100% fondo emergencia"<<endl;
+    cout<<" 2. 25% inversion - 75% fondo emergencia"<<endl;
+    cout<<" 3. 50% inversion - 50% fondo emergencia"<<endl;
+    cout<<" 4. 75% inversion - 25% fondo emergencia"<<endl;
+    cout<<" 5. 100% inversion - 0% fondo emergencia"<<endl;
+    cout<<" 6. Glosario"<<endl;
+    cout<<" 0. No invertir"<<endl;
     cout<<""<<endl;
     cout<<">> ";
     cin>>entrada;
@@ -203,26 +319,33 @@ void inversiones(int contadorPartida, double datos[], string nombre[], int ronda
         aFondo=(datos[index_SaldoPesos]*75)/100;
         datos[index_SaldoPesos]-=aFondo;
         datos[index_FondoEmergencia]+=aFondo;
-        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i, vender);
         break;
     case 3:
         aFondo=(datos[index_SaldoPesos]*50)/100;
         datos[index_SaldoPesos]-=aFondo;
         datos[index_FondoEmergencia]+=aFondo;
-        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i, vender);
         break;
     case 4:
         aFondo=(datos[index_SaldoPesos]*25)/100;
         datos[index_SaldoPesos]-=aFondo;
         datos[index_FondoEmergencia]+=aFondo;
-        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i, vender);
         break;
     case 5:
-        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i);
+        opcionesDeInversion(contadorPartida, datos, nombre, rondas, i, vender);
         break;
+    case 6:
+        glosarioFinanciero();
+        inversiones(contadorPartida, datos, nombre, rondas, i, vender);
+        break;
+    case 0:
+
+        break;
+
     case -1:
-        system("cls");
-        inversiones(contadorPartida, datos, nombre, rondas, i);
+        inversiones(contadorPartida, datos, nombre, rondas, i, vender);
         break;
 
     default:
@@ -231,7 +354,7 @@ void inversiones(int contadorPartida, double datos[], string nombre[], int ronda
 }
 
 
-void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], int rondas, int i)
+void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], int rondas, int i, bool vender)
 {
     int opcion=67;
     string entrada;
@@ -239,17 +362,29 @@ void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], i
     while (opcion!=0)
     {
         system("cls");
-        if(datos[index_SaldoPesos]<=0)
+        if (vender==false)
         {
-            break;
+            if(datos[index_SaldoPesos]<=1e-9)
+            {
+                break;
+            }
+        }
+        else if (vender==true)
+        {
+            if(datos[index_BTC]<=1e-9&&datos[index_Dolares]<=1e-9&&datos[index_SP500]<=1e-9)
+            {
+                break;
+            }
         }
         cartelJugador(contadorPartida, nombre, rondas, i);
-        cout<<"usted tiene $"<<datos[index_SaldoPesos]<<" para invertir"<<endl;
-        cout<<"elegir opcion:"<<endl;
-        cout<<"1. dolares"<<endl;
-        cout<<"2. btc"<<endl;
-        cout<<"3. S&P 500"<<endl;
-        cout<<"0. salir"<<endl;
+
+        cout<<" Saldo actual: $"<<datos[index_SaldoPesos]<<endl;
+        cout<<" Elegir opción:"<<endl;
+        cout<<" 1. Dolares"<<endl;
+        cout<<" 2. BTC"<<endl;
+        cout<<" 3. S&P 500"<<endl;
+        cout<<" 4. Glosario"<<endl;
+        cout<<" 0. Salir"<<endl;
         cout<<">> ";
         cin>>entrada;
         try
@@ -260,19 +395,45 @@ void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], i
         {
             opcion = -1;
         }
-        switch (opcion)
+        if (vender==true)
         {
-        case 1:
-            comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
-            break;
-        case 2:
-            comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
-            break;
-        case 3:
-            comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
-            break;
-        default:
-            break;
+            switch (opcion)
+            {
+            case 1:
+                venderInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
+                break;
+            case 2:
+                venderInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
+                break;
+            case 3:
+                venderInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
+                break;
+            case 4:
+                glosarioFinanciero();
+                break;
+            default:
+                break;
+            }
+        }
+        else if (vender==false)
+        {
+            switch (opcion)
+            {
+            case 1:
+                comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
+                break;
+            case 2:
+                comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
+                break;
+            case 3:
+                comprarInstrumento(contadorPartida, datos, opcion, nombre, rondas, i);
+                break;
+            case 4:
+                glosarioFinanciero();
+                break;
+            default:
+                break;
+            }
         }
     }
 }
@@ -280,7 +441,97 @@ void opcionesDeInversion(int contadorPartida, double datos[], string nombre[], i
 
 void comprarInstrumento(int contadorPartida, double datos[], int opcion, string nombre[], int rondas, int i)
 {
+    bool flag=0;
     double plata=0;
+    double instrumento=0;
+    string entrada;
+    string nombre_instrumento[3]=
+    {
+        "USD",
+        "BTC",
+        "S&P 500"
+    };
+    while (datos[index_SaldoPesos]>0)
+    {
+        system ("cls");
+        plata=0;
+        rlutil::hidecursor();
+        cartelJugador(contadorPartida, nombre, rondas, i);
+        cout<<" ¿Cuánto quiere invertir en "<<nombre_instrumento[opcion-1]<<"?"<<endl;
+        cout<<" (Saldo actual: "<<datos[index_SaldoPesos]<<")"<<endl;
+        cout<<""<<endl;
+        cout<<" "<<nombre_instrumento[opcion-1]<<": $"<<datos[opcion+5]<<endl;
+        cout<<" >> "<<endl;
+        cout<<" Presione [Enter] para escribir..."<<endl;
+        cout<<" [Esc] volver"<<endl;
+        cout<<" [G] Glosario"<<endl;
+        int tecla;
+        do
+        {
+            tecla = rlutil::getkey();
+        }
+        while (tecla != rlutil::KEY_ESCAPE && tecla != rlutil::KEY_ENTER && tecla != 103);
+
+        if (tecla == rlutil::KEY_ESCAPE)
+        {
+            rlutil::showcursor();
+            break;
+        }
+        else if (tecla == rlutil::KEY_ENTER)
+        {
+            flag=false;
+            rlutil::locate(1, 9);
+            cout<<"                                     "<<endl;
+            rlutil::locate(1, 10);
+            cout<<"                                     "<<endl;
+            rlutil::locate(4, 8);
+            rlutil::showcursor();
+            cin >> entrada;
+            try
+            {
+                plata = stoi(entrada);
+            }
+            catch (...)
+            {
+                plata = -1;
+            }
+        }
+        else if (tecla == 103)
+        {
+            flag=true;
+            glosarioFinanciero();
+        }
+        if (flag==false)
+        {
+            if (plata<=0||plata>datos[index_SaldoPesos] + 1e-9)
+            {
+                rlutil::hidecursor();
+                cout<<" Valor no válido."<<endl;
+                rlutil::showcursor();
+                system("pause");
+            }
+            else if (plata>0)
+            {
+                datos[index_SaldoPesos]-=plata;
+                instrumento=(plata/datos[opcion+5]);
+                datos[opcion+2]+=instrumento;
+                rlutil::hidecursor();
+                cout<<" Se ha comprado: $"<<instrumento<<" "<<nombre_instrumento[opcion-1]<<endl;
+                rlutil::showcursor();
+                system("pause");
+                break;
+            }
+        }
+
+
+
+    }
+}
+void venderInstrumento(int contadorPartida, double datos[], int opcion, string nombre[], int rondas, int i)
+{
+    bool flag=0;
+    double plata=0;
+    string entrada;
     double instrumento=0;
     string nombre_instrumento[3]=
     {
@@ -294,19 +545,20 @@ void comprarInstrumento(int contadorPartida, double datos[], int opcion, string 
         plata=0;
         rlutil::hidecursor();
         cartelJugador(contadorPartida, nombre, rondas, i);
-        cout<<"cuanto quiere invertir en "<<nombre_instrumento[opcion-1]<<"?"<<endl;
-        cout<<"(saldo: "<<datos[index_SaldoPesos]<<")"<<endl;
+        cout<<" ¿Cuánto "<<nombre_instrumento[opcion-1]<<" desea vender?"<<endl;
+        cout<<" ("<<nombre_instrumento[opcion-1]<<": "<<datos[opcion+2]<<")"<<endl;
         cout<<""<<endl;
-        cout<<nombre_instrumento[opcion-1]<<": $"<<datos[opcion+5]<<endl;
-        cout<<">> "<<endl;
-        cout<<"Presione [Enter] para escribir..."<<endl;
-        cout<<"[Esc] volver"<<endl;
+        cout<<" 1 "<<nombre_instrumento[opcion-1]<<": $"<<datos[opcion+5]<<endl;
+        cout<<" >> "<<endl;
+        cout<<" Presione [Enter] para escribir..."<<endl;
+        cout<<" [Esc] volver"<<endl;
+        cout<<" [G] Glosario"<<endl;
         int tecla;
         do
         {
             tecla = rlutil::getkey();
         }
-        while (tecla != rlutil::KEY_ESCAPE && tecla != rlutil::KEY_ENTER);
+        while (tecla != rlutil::KEY_ESCAPE && tecla != rlutil::KEY_ENTER && tecla != 103);
 
         if (tecla == rlutil::KEY_ESCAPE)
         {
@@ -315,31 +567,48 @@ void comprarInstrumento(int contadorPartida, double datos[], int opcion, string 
         }
         else if (tecla == rlutil::KEY_ENTER)
         {
+            flag=false;
             rlutil::locate(1, 9);
             cout<<"                                     "<<endl;
             rlutil::locate(1, 10);
             cout<<"                                     "<<endl;
             rlutil::locate(4, 8);
             rlutil::showcursor();
-            cin >> plata;
+            cin >> entrada;
+            try
+            {
+                instrumento = stoi(entrada);
+            }
+            catch (...)
+            {
+                instrumento = -1;
+            }
         }
-        if (plata<=0||plata>datos[index_SaldoPesos])
+        else if (tecla == 103)
         {
-            rlutil::hidecursor();
-            cout<<"Valor no valido."<<endl;
-            rlutil::msleep(2000);
-            rlutil::showcursor();
+            flag=true;
+            glosarioFinanciero();
         }
-        else if (plata>0)
+        if (flag==false)
         {
-            datos[index_SaldoPesos]-=plata;
-            instrumento=(plata/datos[opcion+5]);
-            datos[opcion+2]+=instrumento;
-            rlutil::hidecursor();
-            cout<<"se ha comprado $"<<instrumento<<" "<<nombre_instrumento[opcion-1]<<endl;
-            rlutil::msleep(2000);
-            rlutil::showcursor();
-            break;
+            if (instrumento<=0||instrumento>datos[opcion+2] + 1e-9 )
+            {
+                rlutil::hidecursor();
+                cout<<" Valor no valido."<<endl;
+                rlutil::msleep(2000);
+                rlutil::showcursor();
+            }
+            else if (instrumento>0)
+            {
+                datos[opcion+2]-=instrumento;
+                plata=(instrumento*datos[opcion+5]);
+                datos[index_SaldoPesos]+=plata;
+                rlutil::hidecursor();
+                cout<<" Ha vendido: $"<<instrumento<<" "<<nombre_instrumento[opcion-1]<<"(+$"<<plata<<")"<<endl;
+                rlutil::msleep(2000);
+                rlutil::showcursor();
+                break;
+            }
         }
 
 
@@ -356,8 +625,8 @@ void mostrarResumen(int contadorPartida, string nombre[], double datos[], bool g
     system("cls");
     cout<<"====================================="<<endl;
     cout<<"           RESUMEN FINAL             "<<endl;
-    cout<<"Patrimonio nominal: $"<<patrimonio<<endl;
-    cout<<"Patrimonio real: $"<<patrimonioReal[contadorPartida]<<endl;
+    cout<<" Patrimonio nominal: $"<<patrimonio<<endl;
+    cout<<" Patrimonio real: $"<<patrimonioReal[contadorPartida]<<endl;
     cout<<""<<endl;
 
     if(gameOver==1)
@@ -378,20 +647,24 @@ void mostrarResumen(int contadorPartida, string nombre[], double datos[], bool g
     }
     switch (resultado)
     {
+
     case 0:
-        cout<<"�Felicidades, le ganaste a la inflacion!"<<endl;
+        cout<<" ¡Felicidades, le ganaste a la inflacion! ╰(*°v°*)╯ "<<endl;
         break;
     case 1:
-        cout<<"Le empataste a la inflacion. Podr�a haber sido peor..."<<endl;
+        cout<<" Le empataste a la inflacion. Podría"<<endl;
+        cout<<" haber sido peor... (- ~ -)"<<endl;
         break;
     case 2:
-        cout<<"Que desastre... Te comi� la inflaci�n..."<<endl;
+        cout<<" Que desastre... Te comió la inflación (T - T) "<<endl;
         break;
     case 3:
-        cout<<"Todav�a no est�s listo para el mundo... Te volviste a lo de tus viejos."<<endl;
+        cout<<" Todavía no estás listo para el mundo..."<<endl;
+        cout<<" Te volviste a lo de tus viejos. (u - u)"<<endl;
     default:
         break;
     }
     cout<<"====================================="<<endl;
-    system("pause");
+    cout<< "Presione una tecla para continuar..."<<endl;
+    system("pause > nul");
 }

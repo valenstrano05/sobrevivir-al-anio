@@ -16,13 +16,17 @@ void imprevistos(double datos[]);
 void aumentoAlquiler(int indice, double datos[]);
 void aumentoPorInflacion(double datos[], int rondas);
 void mostrarResumen(int contadorPartida, std::string nombre[], double datos[], bool gameOver, double patrimonioReal[]);
-void inversiones(int contadorPartida, double datos[], std::string nombre[], int rondas, int i);
-void opcionesDeInversion(int contadorPartida, double datos[], std::string nombre[], int rondas, int i);
+void inversiones(int contadorPartida, double datos[], std::string nombre[], int rondas, int i, bool vender);
+void opcionesDeInversion(int contadorPartida, double datos[], std::string nombre[], int rondas, int i, bool vender);
 void comprarInstrumento(int contadorPartida, double datos[], int opcion, std::string nombre[], int rondas, int i);
 void venderInstrumento(int contadorPartida, double datos[], int opcion, std::string nombre[], int rondas, int i);
 void comprarVender(int contadorPartida, double datos[], std::string nombre[], int rondas, int i);
 void cartelJugador(int contadorPartida, std::string nombre[], int rondas, int i);
 void cartelIntro(int contadorPartida, std::string nombre[], int rondas);
-
+void tutorial();
+void tipsEducativos(int mes);
+void cartelTutorial();
+void detallesSesion(double patrimonioReal[], std::string nombre[], int contadorPartida);
+void cartelParpadeante(std::string asciiArt);
 
 #endif // FUNCIONES_H_INCLUDED

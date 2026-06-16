@@ -7,6 +7,7 @@
 #include <ctime>
 #include "rlutil.h"
 #include <iomanip>
+#include <conio.h>
 
 using namespace std;
 
@@ -49,7 +50,7 @@ void cargarDatos (double datos[])
             datos[a]=0.0;
             break;
         case 3:
-            datos[a]=0;
+            datos[a]=0.0;
             break;
         case 4:
             datos[a]=0.0;
@@ -116,89 +117,89 @@ void eventosFijos(int mes, double datos[])
     {
     case 1:
         datos[index_SaldoPesos]+=150000;
-        cout<<"Deposito de garantia: -$180000"<<endl;
+        cout<<" Deposito de garantia: -$180000"<<endl;
         datos[index_SaldoPesos]-=180000;
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 2:
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 3:
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 4:
-        cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
-        cout<<"(+$"<<datos[index_Sueldo]*0.15<<" al sueldo"<<endl;
+        cout<<" Aumento paritario: aumento del 15% al sueldo"<<endl;
+        cout<<" (+$"<<datos[index_Sueldo]*0.15<<" al sueldo)"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 5:
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 6:
         dado=rand()%2;
         if (dado==0)
         {
-            cout<<"BTC se fue a la luna! (aumento del 60%)"<<endl;
+            cout<<" BTC se fue a la luna! (aumento del 60%)"<<endl;
             datos[index_PrecioBTC]*=1.60;
         }
         else
         {
-            cout<<"BTC rompio el piso... (disminución del 50%)"<<endl;
+            cout<<" BTC rompio el piso... (disminución del 50%)"<<endl;
             datos[index_PrecioBTC]*=0.50;
         }
-        cout<<"¡Llego el aguinaldo!"<<endl;
-        cout<<"(+$"<<datos[index_Sueldo]*0.50<<" este mes"<<endl;
+        cout<<" ¡Llego el aguinaldo!"<<endl;
+        cout<<" (+$"<<datos[index_Sueldo]*0.50<<" este mes)"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 7:
-        cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
+        cout<<" Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 8:
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 9:
-        cout<<"Actualizacion de alquiler"<<endl;
+        cout<<" Actualizacion de alquiler"<<endl;
         datos[index_GastosAlquiler]=datos[index_GastosAlquiler]*1.4;
         datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 10:
-        cout<<"Aumento paritario: aumento del 15% al sueldo"<<endl;
+        cout<<" Aumento paritario: aumento del 15% al sueldo"<<endl;
         datos[index_Sueldo]=datos[index_Sueldo]*1.15;
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 11:
         dado=rand()%2;
         if (dado==0)
         {
-            cout<<"BTC se fue a la luna! (aumento del 60%)"<<endl;
+            cout<<" BTC se fue a la luna! (aumento del 60%)"<<endl;
             datos[index_PrecioBTC]*=1.60;
         }
         else
         {
-            cout<<"BTC rompio el piso... (disminución del 50%)"<<endl;
+            cout<<" BTC rompio el piso... (disminución del 50%)"<<endl;
             datos[index_PrecioBTC]*=0.50;
         }
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 12:
-        cout<<"Aguinaldo"<<endl;
+        cout<<" Aguinaldo"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
-        cout<<"Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     default:
@@ -214,18 +215,18 @@ void imprevistos(double datos[])
     double totalImprevistos=0.0;
     string imprevistoNombre[12]=
     {
-        "Se rompio el lavarropas",
-        "Visita medica inesperada",
-        "Multa de transito",
-        "Tecnico de internet",
-        "Regalo de cumpleaños obligado",
-        "Rompiste un vidrio en el gimnasio",
-        "Cena o salida social ineludible",
-        "Se rompio la pantalla del celular",
-        "Subio la expensa del edificio",
-        "Mini escapada de ultimo momento",
-        "Black Friday - oferta irresistible",
-        "Regalos de fin de año"
+        " Se rompio el lavarropas",
+        " Visita medica inesperada",
+        " Multa de transito",
+        " Tecnico de internet",
+        " Regalo de cumpleaños obligado",
+        " Rompiste un vidrio en el gimnasio",
+        " Cena o salida social ineludible",
+        " Se rompio la pantalla del celular",
+        " Subio la expensa del edificio",
+        " Mini escapada de ultimo momento",
+        " Black Friday - oferta irresistible",
+        " Regalos de fin de año"
     };
 
     double imprevistoCosto[12]=
@@ -242,7 +243,7 @@ void imprevistos(double datos[])
     {
         indice=rand() % 12;
         cout<<imprevistoNombre[indice]<<endl;
-        cout<<"Costo: -$"<<imprevistoCosto[indice]<<endl;
+        cout<<" Costo: -$"<<imprevistoCosto[indice]<<endl;
         totalImprevistos+=imprevistoCosto[indice];
         cantidadImprevistos++;
         aumentoAlquiler(indice, datos);
@@ -252,7 +253,7 @@ void imprevistos(double datos[])
         {
             indice=rand()%12;
             cout<<imprevistoNombre[indice]<<endl;
-            cout<<"Costo: -$"<<imprevistoCosto[indice]<<endl;
+            cout<<" Costo: -$"<<imprevistoCosto[indice]<<endl;
             totalImprevistos+=imprevistoCosto[indice];
             cantidadImprevistos++;
             aumentoAlquiler(indice, datos);
@@ -262,7 +263,7 @@ void imprevistos(double datos[])
             {
                 indice=rand()%12;
                 cout<<imprevistoNombre[indice]<<endl;
-                cout<<"Costo: -$"<<imprevistoCosto[indice]<<endl;
+                cout<<" Costo: -$"<<imprevistoCosto[indice]<<endl;
                 totalImprevistos+=imprevistoCosto[indice];
                 cantidadImprevistos++;
                 aumentoAlquiler(indice, datos);
@@ -271,11 +272,11 @@ void imprevistos(double datos[])
     }
     if (cantidadImprevistos==0)
     {
-        cout<<"Sin imprevistos este mes."<<endl;
+        cout<<" Sin imprevistos este mes."<<endl;
     }
     else if (datos[index_FondoEmergencia]>=totalImprevistos)
     {
-        cout<<"(Tu fondo lo pudo cubrir...)"<<endl;
+        cout<<" (Tu fondo lo pudo cubrir...)"<<endl;
         datos[index_FondoEmergencia]-=totalImprevistos;
     }
     else
