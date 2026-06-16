@@ -32,11 +32,12 @@ const int index_AhorroMinimo=17;
 const int index_MejorMes=18;
 const int index_PeorMes=19;
 const int index_InflacionAcumulada=20;
+const int index_ImprevistosAcumulados=21;
 
 void cargarDatos (double datos[])
 {
 
-    for(int a=0; a<21; a++)
+    for(int a=0; a<22; a++)
     {
         switch(a)
         {
@@ -102,6 +103,9 @@ void cargarDatos (double datos[])
             break;
         case 20:
             datos[a]=1.0;
+            break;
+        case 21:
+            datos[a]=0.0;
             break;
         default:
             break;
@@ -237,6 +241,7 @@ void imprevistos(double datos[])
 
     int dado[3];
     int indice;
+    datos[index_ImprevistosAcumulados]=0.0;
     dado[0]=rand()%100;
 
     if (dado[0]<70)
@@ -278,10 +283,12 @@ void imprevistos(double datos[])
     {
         cout<<" (Tu fondo lo pudo cubrir...)"<<endl;
         datos[index_FondoEmergencia]-=totalImprevistos;
+        datos[index_ImprevistosAcumulados]=totalImprevistos;
     }
     else
     {
         datos[index_SaldoPesos]-=totalImprevistos;
+        datos[index_ImprevistosAcumulados]=totalImprevistos;
     }
 }
 

@@ -31,6 +31,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
         cout<<"| 4. Detalles de la sesión             |"<<endl;
         cout<<"|                                      |"<<endl;
         cout<<"| 0. Salir                             |"<<endl;
+        cout<<"|                                      |"<<endl;
         cout<<" ======================================"<<endl;
         cout<<" Ingrese una opción: ";
         cin>>entrada;
@@ -250,7 +251,7 @@ void glosarioFinanciero()
             cout<<""<<endl;
             cout<<" Ingrese una página: "<<endl;
             cout<<"=========================================================================";
-            rlutil::locate(22,17);
+            rlutil::locate(22,18);
             cin >> entrada;
             try
             {

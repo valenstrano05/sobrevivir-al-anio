@@ -158,11 +158,15 @@ void cartelIntro(int contadorPartida, string nombre[], int rondas)
     cout<<"|";
     escribirLento("  MES ", velocidad);
     cout<< "1/"<< rondas;
-    Sleep(200);
-    escribirLento("       JUGADOR: ", velocidad);
-    cout<<nombre[contadorPartida]<<endl;
-    rlutil::locate(38, 2);
+    rlutil::locate(40, 2);
     cout<<"|"<<endl;
+    Sleep(200);
+    cout<<"|";
+    escribirLento("  JUGADOR: ", velocidad);
+    cout<<nombre[contadorPartida]<<endl;
+    rlutil::locate(40, 3);
+    cout<<"|"<<endl;
+    Sleep(200);
     escribirLento(" ======================================", velocidad);
     cout<<endl;
     Sleep(200);
@@ -231,7 +235,7 @@ void tutorial()
             cout<<""<<endl;
             cout<<" Ingrese una opción: "<<endl;
             cout<<"=========================================================================";
-            rlutil::locate(2,13);
+            rlutil::locate(22,10);
             cin >> entrada;
             try
             {
@@ -247,6 +251,7 @@ void tutorial()
         mostrarMenu=1;
         if(opcion==0)
         {
+            system("cls");
             return;
         }
         if(opcion>=1&&opcion<=5)
@@ -351,72 +356,114 @@ void tutorial()
 
 void tipsEducativos(int mes)
 {
-    cout << " -------------------------------------" << endl;
-    cout << "          ~CONSEJO DEL MES~           " << endl;
+    int x=44;
+    int y=10;
+    rlutil::locate(x, y); cout << " -------------------------------------" << endl;
+    rlutil::locate(x, y+1); cout << " |        ~CONSEJO DEL MES~          |" << endl;
+    rlutil::locate(x, y+2); cout << " -------------------------------------" << endl;
 
     switch (mes)
     {
     case 1:
-        cout << " La INFLACION es el aumento sostenido de" << endl;
-        cout << " los precios. Tus $500k de hoy valen menos" << endl;
-        cout << " cada mes que pasa." << endl;
+        rlutil::locate(x, y+3); cout << " La INFLACION es el aumento sostenido de" << endl;
+        rlutil::locate(x, y+4); cout << " los precios. Tus $500k de hoy valen menos" << endl;
+        rlutil::locate(x, y+5); cout << " cada mes que pasa." << endl;
         break;
     case 2:
-        cout << " El FONDO DE EMERGENCIA cubre imprevistos" << endl;
-        cout << " sin tener que vender inversiones a perdida." << endl;
-        cout << " Se recomienda tener 3-6 meses de gastos." << endl;
+        rlutil::locate(x, y+3); cout << " El FONDO DE EMERGENCIA cubre imprevistos" << endl;
+        rlutil::locate(x, y+4); cout << " sin tener que vender inversiones a perdida." << endl;
+        rlutil::locate(x, y+5); cout << " Se recomienda tener 3-6 meses de gastos." << endl;
         break;
     case 3:
-        cout << " El COSTO DE OPORTUNIDAD es lo que resignas" << endl;
-        cout << " al elegir. Dejar plata en pesos 'sin hacer" << endl;
-        cout << " nada' tiene un costo: la inflacion." << endl;
+        rlutil::locate(x, y+3); cout << " El COSTO DE OPORTUNIDAD es lo que resignas" << endl;
+        rlutil::locate(x, y+4); cout << " al elegir. Dejar plata en pesos 'sin hacer" << endl;
+        rlutil::locate(x, y+5); cout << " nada' tiene un costo: la inflacion." << endl;
         break;
     case 4:
-        cout << " Tu sueldo subio 15% pero la inflacion" << endl;
-        cout << " acumulada ya supera ese numero. Eso se" << endl;
-        cout << " llama caida del SALARIO REAL." << endl;
+        rlutil::locate(x, y+3); cout << " Tu sueldo subio 15% pero la inflacion" << endl;
+        rlutil::locate(x, y+4); cout << " acumulada ya supera ese numero. Eso se" << endl;
+        rlutil::locate(x, y+5); cout << " llama caida del SALARIO REAL." << endl;
         break;
     case 5:
-        cout << " DIVERSIFICAR es distribuir el dinero en" << endl;
-        cout << " varios instrumentos para no depender de uno" << endl;
-        cout << " solo. No pongas todos los huevos en una" << endl;
-        cout << " canasta." << endl;
+        rlutil::locate(x, y+3); cout << " DIVERSIFICAR es distribuir el dinero en" << endl;
+        rlutil::locate(x, y+4); cout << " varios instrumentos para no depender de uno" << endl;
+        rlutil::locate(x, y+5); cout << " solo. No pongas todos los huevos en una" << endl;
+        rlutil::locate(x, y+6); cout << " canasta." << endl;
         break;
     case 6:
-        cout << " El AGUINALDO (SAC) es un derecho laboral." << endl;
-        cout << " Existe porque el sueldo no ajusta" << endl;
-        cout << " continuamente. Si la inflacion es alta," << endl;
-        cout << " igual perdes poder adquisitivo." << endl;
+        rlutil::locate(x, y+3); cout << " El AGUINALDO (SAC) es un derecho laboral." << endl;
+        rlutil::locate(x, y+4); cout << " Existe porque el sueldo no ajusta" << endl;
+        rlutil::locate(x, y+5); cout << " continuamente. Si la inflacion es alta," << endl;
+        rlutil::locate(x, y+6); cout << " igual perdes poder adquisitivo." << endl;
         break;
     case 7:
-        cout << " La VOLATILIDAD mide cuanto varia el precio" << endl;
-        cout << " de un activo. Bitcoin es muy volatil: puede" << endl;
-        cout << " hacerte rico o dejarte en cero en un mes." << endl;
+        rlutil::locate(x, y+3); cout << " La VOLATILIDAD mide cuanto varia el precio" << endl;
+        rlutil::locate(x, y+4); cout << " de un activo. Bitcoin es muy volatil: puede" << endl;
+        rlutil::locate(x, y+5); cout << " hacerte rico o dejarte en cero en un mes." << endl;
         break;
     case 8:
-        cout << " La LIQUIDEZ es que tan facil podes convertir" << endl;
-        cout << " un activo en efectivo. El cash es lo mas" << endl;
-        cout << " liquido; una propiedad, lo menos." << endl;
+        rlutil::locate(x, y+3); cout << " La LIQUIDEZ es que tan facil podes convertir" << endl;
+        rlutil::locate(x, y+4); cout << " un activo en efectivo. El cash es lo mas" << endl;
+        rlutil::locate(x, y+5); cout << " liquido; una propiedad, lo menos." << endl;
         break;
     case 9:
-        cout << " La INDEXACION ajusta contratos segun la" << endl;
-        cout << " inflacion. Tu alquiler se actualizo asi." << endl;
-        cout << " Protege al duenio pero te afecta a vos." << endl;
+        rlutil::locate(x, y+3); cout << " La INDEXACION ajusta contratos segun la" << endl;
+        rlutil::locate(x, y+4); cout << " inflacion. Tu alquiler se actualizo asi." << endl;
+        rlutil::locate(x, y+5); cout << " Protege al duenio pero te afecta a vos." << endl;
         break;
     case 10:
-        cout << " El S&P 500 es un indice de las 500 empresas" << endl;
-        cout << " mas grandes de EE.UU. Invertir en su ETF es" << endl;
-        cout << " apostar al crecimiento del capitalismo." << endl;
+        rlutil::locate(x, y+3); cout << " El S&P 500 es un indice de las 500 empresas" << endl;
+        rlutil::locate(x, y+4); cout << " mas grandes de EE.UU. Invertir en su ETF es" << endl;
+        rlutil::locate(x, y+5); cout << " apostar al crecimiento del capitalismo." << endl;
         break;
     case 11:
-        cout << " El BITCOIN tuvo un mes extremo. Asi es la" << endl;
-        cout << " ESPECULACION: ganancias y perdidas enormes" << endl;
-        cout << " en poco tiempo. No es para todos los perfiles." << endl;
+        rlutil::locate(x, y+3); cout << " El BITCOIN tuvo un mes extremo. Asi es la" << endl;
+        rlutil::locate(x, y+4); cout << " ESPECULACION: ganancias y perdidas enormes" << endl;
+        rlutil::locate(x, y+5); cout << " en poco tiempo. No es para todos los perfiles." << endl;
         break;
     case 12:
-        cout << " El PATRIMONIO REAL es lo que vale tu dinero" << endl;
-        cout << " ajustado por inflacion. No alcanza con tener" << endl;
-        cout << " mas pesos: hay que ganarle a la inflacion." << endl;
+        rlutil::locate(x, y+3); cout << " El PATRIMONIO REAL es lo que vale tu dinero" << endl;
+        rlutil::locate(x, y+4); cout << " ajustado por inflacion. No alcanza con tener" << endl;
+        rlutil::locate(x, y+5); cout << " mas pesos: hay que ganarle a la inflacion." << endl;
         break;
     }
+}
+
+void cartelesInstrumentos(int opcion)
+{
+    string nombre_instrumento[3]=
+    {
+        "USD",
+        "BTC",
+        "S&P"
+    };
+    int x=44;
+    int y=5;
+    rlutil::locate(x, y); cout << " -------------------------------------" << endl;
+    rlutil::locate(x, y+1); cout << " |                ~"<<nombre_instrumento[opcion-1]<<"~               |" << endl;
+    rlutil::locate(x, y+2); cout << " -------------------------------------" << endl;
+
+    switch (opcion)
+    {
+    case 1:
+        rlutil::locate(x, y+3); cout << " Los USD son una reserva de valor históricamente" << endl;
+        rlutil::locate(x, y+4); cout << " confiable. Sube un ~5% mensual, aunque pocas veces" << endl;
+        rlutil::locate(x, y+5); cout << " puede bajar muy poquito." << endl;
+        break;
+    case 2:
+        rlutil::locate(x, y+3); cout << " El BTC es un instrumento de muy alta volatilidad." << endl;
+        rlutil::locate(x, y+4); cout << " A veces puede subir 25%, otras veces bajar 20%." << endl;
+        rlutil::locate(x, y+5); cout << " Cuidado, que en Junio y Noviembre puede" << endl;
+        rlutil::locate(x, y+6); cout << " o irse a la luna, o romper el piso..." << endl;
+        break;
+    case 3:
+        rlutil::locate(x, y+3); cout << " El S&P 500 es un índice de mercado estadounidense" << endl;
+        rlutil::locate(x, y+4); cout << " que es perfecto para perfiles conservadores." << endl;
+        rlutil::locate(x, y+5); cout << " Mensualmente, crece un 1%. No tiene sorpresas." << endl;
+        break;
+
+    default:
+        break;
+    }
+
 }
