@@ -53,6 +53,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
         case 2:
             if(contadorPartida==0)
             {
+                rlutil::hidecursor();
                 system("cls");
                 cout<<" =================================================="<<endl;
                 cout<<"|                  * HIGHSCORE *                   |"<<endl;
@@ -74,6 +75,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
                 cout<<" Presione una tecla para regresar al menú"<<endl;
                 rlutil::locate(42, 18);
                 system("pause >nul");
+                rlutil::showcursor();
             }
             else
             {
@@ -85,6 +87,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
             break;
         case 4:
             if(contadorPartida==0){
+                rlutil::hidecursor();
                 system("cls");
                 cout<<" =================================================="<<endl;
                 cout<<"|            DETALLES DE LAS PARTIDAS              |"<<endl;
@@ -105,10 +108,10 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
                 cout<<" =================================================="<<endl;
                 rlutil::locate(42, 18);
                 system("pause > nul");
+                rlutil::showcursor();
             }
             else{
                 detallesSesion(patrimonioReal, nombre, contadorPartida);
-                system("pause");
             }
             break;
         case 0:
@@ -163,6 +166,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
 }
 
 void detallesSesion(double patrimonioReal[], string nombre[], int contadorPartida){
+    rlutil::hidecursor();
     system("cls");
     cout<<" =================================================="<<endl;
     cout<<"|            DETALLES DE LAS PARTIDAS              |"<<endl;
@@ -170,30 +174,32 @@ void detallesSesion(double patrimonioReal[], string nombre[], int contadorPartid
     cout<<" ================================================== "<<endl;
     cout<<"|                                                  |"<<endl;
     cout<<"| 1."<<nombre[0]<<": $"<<patrimonioReal[0];
-    rlutil::locate(52, 5);
-    cout<<"|                                         "<<endl;
-    cout<<"| 2."<<nombre[1]<<": $"<<patrimonioReal[1];
     rlutil::locate(52, 6);
     cout<<"|                                         "<<endl;
-    cout<<"| 3."<<nombre[2]<<": $"<<patrimonioReal[2];
+    cout<<"| 2."<<nombre[1]<<": $"<<patrimonioReal[1];
     rlutil::locate(52, 7);
     cout<<"|                                         "<<endl;
-    cout<<"| 4."<<nombre[3]<<": $"<<patrimonioReal[3];
+    cout<<"| 3."<<nombre[2]<<": $"<<patrimonioReal[2];
     rlutil::locate(52, 8);
     cout<<"|                                         "<<endl;
-    cout<<"| 5."<<nombre[4]<<": $"<<patrimonioReal[4];
+    cout<<"| 4."<<nombre[3]<<": $"<<patrimonioReal[3];
     rlutil::locate(52, 9);
+    cout<<"|                                         "<<endl;
+    cout<<"| 5."<<nombre[4]<<": $"<<patrimonioReal[4];
+    rlutil::locate(52, 10);
     cout<<"|                                         "<<endl;
     cout<<"|                                                  |"<<endl;
     cout<<" =================================================="<<endl;
     cout<<" Presione una tecla para regresar al menú"<<endl;
     rlutil::locate(42, 18);
     system("pause > nul");
+    rlutil::showcursor();
 }
 
 void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorPartida)
 {
     system("cls");
+    rlutil::hidecursor();
     int maximo=0;
     for(int i=0; i<contadorPartida; i++)
     {
@@ -221,6 +227,7 @@ void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorP
     cout<<" Presione una tecla para regresar al menú"<<endl;
     rlutil::locate(42, 18);
     system("pause > nul");
+    rlutil::showcursor();
 }
 
 void glosarioFinanciero()

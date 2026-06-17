@@ -138,8 +138,23 @@ void cartelTutorial()
 
 void cartelJugador(int contadorPartida, string nombre[], int rondas, int i)
 {
+    string mes[12]=
+    {
+        "ENERO",
+        "FEBRERO",
+        "MARZO",
+        "ABRIL",
+        "MAYO",
+        "JUNIO",
+        "JULIO",
+        "AGOSTO",
+        "SEPTIEMBRE",
+        "OCTUBRE",
+        "NOVIEMBRE",
+        "DICIEMBRE"
+    };
     cout<<" ======================================"<<endl;
-    cout<<"|  MES "<<i<<"/"<<rondas<<endl;
+    cout<<"|  MES "<<i<<"/"<<rondas<<"                "<<mes[i-1]<<endl;
     rlutil::locate(40, 2);
     cout<<"|"<<endl;
     cout<<"|  JUGADOR: "<<nombre[contadorPartida]<<endl;
@@ -157,7 +172,7 @@ void cartelIntro(int contadorPartida, string nombre[], int rondas)
     cout<<endl;
     cout<<"|";
     escribirLento("  MES ", velocidad);
-    cout<< "1/"<< rondas;
+    cout<< "1/"<< rondas<<"                ENERO";
     rlutil::locate(40, 2);
     cout<<"|"<<endl;
     Sleep(200);
@@ -171,7 +186,7 @@ void cartelIntro(int contadorPartida, string nombre[], int rondas)
     cout<<endl;
     Sleep(200);
 
-    escribirLento(" La fecha es 16 de Enero.", velocidadTexto);
+    escribirLento(" La fecha es 23 de Enero.", velocidadTexto);
     cout<<endl;
     Sleep(300);
     escribirLento(" Luego de una larga búsqueda, ", velocidadTexto);
@@ -357,10 +372,10 @@ void tutorial()
 void tipsEducativos(int mes)
 {
     int x=44;
-    int y=10;
-    rlutil::locate(x, y); cout << " -------------------------------------" << endl;
-    rlutil::locate(x, y+1); cout << " |        ~CONSEJO DEL MES~          |" << endl;
-    rlutil::locate(x, y+2); cout << " -------------------------------------" << endl;
+    int y=1;
+    rlutil::locate(x, y); cout << " =====================================" << endl;
+    rlutil::locate(x, y+1); cout << "|          ~CONSEJO DEL MES~          |" << endl;
+    rlutil::locate(x, y+2); cout << " =====================================" << endl;
 
     switch (mes)
     {
@@ -439,15 +454,15 @@ void cartelesInstrumentos(int opcion)
     };
     int x=44;
     int y=5;
-    rlutil::locate(x, y); cout << " -------------------------------------" << endl;
+    rlutil::locate(x, y); cout << "  -------------------------------------" << endl;
     rlutil::locate(x, y+1); cout << " |                ~"<<nombre_instrumento[opcion-1]<<"~               |" << endl;
-    rlutil::locate(x, y+2); cout << " -------------------------------------" << endl;
+    rlutil::locate(x, y+2); cout << "  -------------------------------------" << endl;
 
     switch (opcion)
     {
     case 1:
         rlutil::locate(x, y+3); cout << " Los USD son una reserva de valor históricamente" << endl;
-        rlutil::locate(x, y+4); cout << " confiable. Sube un ~5% mensual, aunque pocas veces" << endl;
+        rlutil::locate(x, y+4); cout << " confiable. Sube un ~10% mensual, aunque pocas veces" << endl;
         rlutil::locate(x, y+5); cout << " puede bajar muy poquito." << endl;
         break;
     case 2:

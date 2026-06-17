@@ -154,8 +154,8 @@ void eventosFijos(int mes, double datos[])
         }
         else
         {
-            cout<<" BTC rompio el piso... (disminución del 50%)"<<endl;
-            datos[index_PrecioBTC]*=0.50;
+            cout<<" BTC rompio el piso... (disminución del 80%)"<<endl;
+            datos[index_PrecioBTC]*=0.20;
         }
         cout<<" ¡Llego el aguinaldo!"<<endl;
         cout<<" (+$"<<datos[index_Sueldo]*0.50<<" este mes)"<<endl;
@@ -194,8 +194,8 @@ void eventosFijos(int mes, double datos[])
         }
         else
         {
-            cout<<" BTC rompio el piso... (disminución del 50%)"<<endl;
-            datos[index_PrecioBTC]*=0.50;
+            cout<<" BTC rompio el piso... (disminución del 80%)"<<endl;
+            datos[index_PrecioBTC]*=0.20;
         }
         cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
@@ -314,28 +314,29 @@ void aumentoPorInflacion(double datos[], int rondas)
     datos[index_GastosAlquiler]*=inflacion;
     datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
     datos[index_InflacionAcumulada]*=1.07;
-    datos[index_PrecioSP500]*=1.01;
+    datos[index_PrecioSP500]*=1.05;
     dado=rand()%100;
     if (dado<=9)
     {
         if (contadorDisminucion<5)
         {
-            datos[index_PrecioDolar]*=0.99;
+            datos[index_PrecioDolar]*=0.97;
             contadorDisminucion++;
         }
-        else if (dado<=29)
-        {
-            datos[index_PrecioDolar]*=1.04;
-        }
-        else if (dado<=59)
-        {
-            datos[index_PrecioDolar]*=1.05;
-        }
-        else
-        {
-            datos[index_PrecioDolar]*=1.06;
-        }
     }
+    else if (dado<=29)
+        {
+            datos[index_PrecioDolar]*=1.09;
+        }
+    else if (dado<=59)
+        {
+            datos[index_PrecioDolar]*=1.10;
+        }
+    else
+        {
+            datos[index_PrecioDolar]*=1.11;
+        }
+
     if (rondas%2==0)
     {
         datos[index_PrecioBTC]*=1.25;

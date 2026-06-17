@@ -41,9 +41,9 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
     string entrada;
     char salida;
     int velocidad=15;
-    cout<<"====================================="<<endl;
-    cout<<"            NUEVA PARTIDA            "<<endl;
-    cout<<"====================================="<<endl;
+    cout<<" =================================================="<<endl;
+    cout<<"|                  NUEVA PARTIDA                   |"<<endl;
+    cout<<" =================================================="<<endl;
     Sleep(100);
     escribirLento(" Sistema: ¿Cómo es su nombre?", velocidad);
     cout<<endl;
@@ -51,17 +51,21 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
     escribirLento(" ???: Yo me llamo... ", velocidad);
     cin>>nombre[contadorPartida];
     Sleep(100);
-    escribirLento(" Sistema: ¡Que lindo nombre! Bienvenido/a a mí juego, ", velocidad);
+    escribirLento(" Sistema: ¡Que lindo nombre!", velocidad);
+    cout<<endl;
+    escribirLento(" Sistema: Bienvenido/a a mí juego, ", velocidad);
     escribirLento(nombre[contadorPartida], velocidad);
     cout<<"."<<endl;
     Sleep(100);
-    escribirLento(" Sistema: ¿Cuantos meses desea jugar? (de 1 a 12 meses, recomendado 12)", velocidad);
+    escribirLento(" Sistema: ¿Cuantos meses desea jugar?", velocidad);
+    cout<<endl;
+    escribirLento(" Sistema: (de 6 a 12 meses, recomendado 12)", velocidad);
     cout<<endl;
     Sleep(100);
     cout<<" ";
     escribirLento(nombre[contadorPartida], velocidad);
     escribirLento(": ", velocidad);
-    while(rondas<1||rondas>12)
+    while(rondas<6||rondas>12)
     {
         cin>>entrada;
         try
@@ -72,7 +76,7 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
         {
             rondas = -1;
         }
-        if (rondas<1||rondas>12)
+        if (rondas<6||rondas>12)
         {
             escribirLento(" Sistema: La cantidad de rondas es inválida. Por favor, ingresela nuevamente.", velocidad);
             cout<<endl;
@@ -83,37 +87,12 @@ void crearPartidaNueva(int contadorPartida, string nombre[], double patrimonioRe
         }
         else
         {
-            escribirLento(" Sistema: Excelente.", velocidad);
+            escribirLento(" Sistema: Excelente. Comencemos...", velocidad);
             cout<<endl;
-            bool verdadero=true;
-            while(verdadero)
-            {
-                escribirLento(" Sistema: Desea ver un tutorial antes de comenzar? (s/n)", velocidad);
-                cout<<endl;
-                cout<<" ";
-                escribirLento(nombre[contadorPartida], velocidad);
-                escribirLento(": ", velocidad);
-                cin>>salida;
-                switch (salida)
-                {
-                case 's':
-                    escribirLento(" Sistema: Muy bien. Será llevado al tutorial.", velocidad);
-                    Sleep(300);
-                    tutorial();
-                    verdadero=false;
-                    break;
-                case 'n':
-                    escribirLento(" Sistema: Muy bien. Comencemos...", velocidad);
-                    verdadero=false;
-                    break;
-
-                default:
-                    break;
-                }
-            }
+        }
             Sleep(500);
         }
-    }
+
 
     jugarPartida(contadorPartida, nombre, rondas, patrimonioReal);
 }
@@ -127,7 +106,22 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
     cargarDatos(datosPartida);
     system("cls");
     Sleep(400);
-    cartelIntro(contadorPartida, nombre, rondas);
+    string mes[12]=
+    {
+        "ENERO",
+        "FEBRERO",
+        "MARZO",
+        "ABRIL",
+        "MAYO",
+        "JUNIO",
+        "JULIO",
+        "AGOSTO",
+        "SEPTIEMBRE",
+        "OCTUBRE",
+        "NOVIEMBRE",
+        "DICIEMBRE"
+    };
+    //cartelIntro(contadorPartida, nombre, rondas);
     for(int i=1; i<=rondas; i++)
     {
         rlutil::hidecursor();
@@ -177,7 +171,7 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
         {
             system("cls");
             cout<<" ======================================"<<endl;
-            cout<<"|  MES "<<i<<"/"<<rondas<<endl;
+            cout<<"|  MES "<<i<<"/"<<rondas<<"                "<<mes[i-1]<<endl;
             rlutil::locate(40, 2);
             cout<<"|"<<endl;
             cout<<"|  JUGADOR: "<<nombre[contadorPartida]<<endl;
@@ -236,7 +230,7 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
                 }
             }
         }
-        aumentoPorInflacion(datosPartida, rondas);
+        aumentoPorInflacion(datosPartida, i);
         rlutil::showcursor();
     }
     mostrarResumen(contadorPartida, nombre, datosPartida, gameOver, patrimonioReal);
