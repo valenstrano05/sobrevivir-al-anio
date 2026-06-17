@@ -14,12 +14,14 @@ using namespace std;
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     rlutil::hidecursor();
     int velocidad=0;
     srand(time(0));
     cout<<fixed<<setprecision(2);
     string nombre[5];
     double patrimonioReal[5];
+    cargarDatosPat(patrimonioReal);
     string titulo= R"(
   ____        _                    _       _             _      _    ____
  / ___|  ___ | |__  _ __ _____   _(_)_   _(_)_ __    ___| |    / \   _ __   ___
