@@ -595,6 +595,6 @@ void mostrarColor(double datosPat[], int posicion)
     {
         (datosPat[posicion]>=650000*0.90&&datosPat[posicion]<=650000*1.10)?rlutil::setColor(rlutil::YELLOW):rlutil::setColor(rlutil::RED);
     }
-    cout<<"$"<<datosPat[1];
+    cout<<"$"<<datosPat[posicion];
     rlutil::setColor(rlutil::WHITE);
 }
