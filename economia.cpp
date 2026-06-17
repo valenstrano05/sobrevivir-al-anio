@@ -32,11 +32,12 @@ const int index_AhorroMinimo=17;
 const int index_MejorMes=18;
 const int index_PeorMes=19;
 const int index_InflacionAcumulada=20;
+const int index_ImprevistosAcumulados=21;
 
 void cargarDatos (double datos[])
 {
 
-    for(int a=0; a<21; a++)
+    for(int a=0; a<22; a++)
     {
         switch(a)
         {
@@ -103,6 +104,9 @@ void cargarDatos (double datos[])
         case 20:
             datos[a]=1.0;
             break;
+        case 21:
+            datos[a]=0.0;
+            break;
         default:
             break;
         }
@@ -150,8 +154,8 @@ void eventosFijos(int mes, double datos[])
         }
         else
         {
-            cout<<" BTC rompio el piso... (disminución del 50%)"<<endl;
-            datos[index_PrecioBTC]*=0.50;
+            cout<<" BTC rompio el piso... (disminución del 80%)"<<endl;
+            datos[index_PrecioBTC]*=0.20;
         }
         cout<<" ¡Llego el aguinaldo!"<<endl;
         cout<<" (+$"<<datos[index_Sueldo]*0.50<<" este mes)"<<endl;
@@ -190,8 +194,8 @@ void eventosFijos(int mes, double datos[])
         }
         else
         {
-            cout<<" BTC rompio el piso... (disminución del 50%)"<<endl;
-            datos[index_PrecioBTC]*=0.50;
+            cout<<" BTC rompio el piso... (disminución del 80%)"<<endl;
+            datos[index_PrecioBTC]*=0.20;
         }
         cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
@@ -237,6 +241,7 @@ void imprevistos(double datos[])
 
     int dado[3];
     int indice;
+    datos[index_ImprevistosAcumulados]=0.0;
     dado[0]=rand()%100;
 
     if (dado[0]<70)
@@ -278,10 +283,12 @@ void imprevistos(double datos[])
     {
         cout<<" (Tu fondo lo pudo cubrir...)"<<endl;
         datos[index_FondoEmergencia]-=totalImprevistos;
+        datos[index_ImprevistosAcumulados]=totalImprevistos;
     }
     else
     {
         datos[index_SaldoPesos]-=totalImprevistos;
+        datos[index_ImprevistosAcumulados]=totalImprevistos;
     }
 }
 
@@ -307,28 +314,29 @@ void aumentoPorInflacion(double datos[], int rondas)
     datos[index_GastosAlquiler]*=inflacion;
     datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
     datos[index_InflacionAcumulada]*=1.07;
-    datos[index_PrecioSP500]*=1.01;
+    datos[index_PrecioSP500]*=1.05;
     dado=rand()%100;
     if (dado<=9)
     {
         if (contadorDisminucion<5)
         {
-            datos[index_PrecioDolar]*=0.99;
+            datos[index_PrecioDolar]*=0.97;
             contadorDisminucion++;
         }
-        else if (dado<=29)
-        {
-            datos[index_PrecioDolar]*=1.04;
-        }
-        else if (dado<=59)
-        {
-            datos[index_PrecioDolar]*=1.05;
-        }
-        else
-        {
-            datos[index_PrecioDolar]*=1.06;
-        }
     }
+    else if (dado<=29)
+        {
+            datos[index_PrecioDolar]*=1.09;
+        }
+    else if (dado<=59)
+        {
+            datos[index_PrecioDolar]*=1.10;
+        }
+    else
+        {
+            datos[index_PrecioDolar]*=1.11;
+        }
+
     if (rondas%2==0)
     {
         datos[index_PrecioBTC]*=1.25;

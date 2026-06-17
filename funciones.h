@@ -28,5 +28,6 @@ void tipsEducativos(int mes);
 void cartelTutorial();
 void detallesSesion(double patrimonioReal[], std::string nombre[], int contadorPartida);
 void cartelParpadeante(std::string asciiArt);
+void cartelesInstrumentos(int opcion);
 
 #endif // FUNCIONES_H_INCLUDED
