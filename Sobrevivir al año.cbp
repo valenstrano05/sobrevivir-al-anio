@@ -32,15 +32,18 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Linker>
+			<Add option="-static-libstdc++" />
+			<Add option="-static-libgcc" />
+			<Add option="-static" />
+		</Linker>
 		<Unit filename="carteles.cpp" />
 		<Unit filename="economia.cpp" />
 		<Unit filename="funciones.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.cpp" />
-		<Unit filename="menuPrincipal.cpp">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="menuPrincipal.cpp" />
 		<Unit filename="partida.cpp" />
 		<Unit filename="rlutil.h" />
 		<Extensions />

@@ -243,8 +243,11 @@ void jugarPartida(int contadorPartida, string nombre[], int rondas, double patri
                 }
             }
         }
+        if (i!=rondas)
+        {
         aumentoPorInflacion(datosPartida, i);
         rlutil::showcursor();
+        }
     }
     mostrarResumen(contadorPartida, nombre, datosPartida, gameOver, patrimonioReal);
     rlutil::showcursor();

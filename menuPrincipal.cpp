@@ -215,6 +215,7 @@ void detallesSesion(double patrimonioReal[], string nombre[], int contadorPartid
     rlutil::locate(54, 8);
     cout<<"Rojo: Perdio contra la inflacion"<<endl;
     system("pause > nul");
+    rlutil::setColor(rlutil::WHITE);
     rlutil::showcursor();
 }
 
