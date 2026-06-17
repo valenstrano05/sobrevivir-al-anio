@@ -5,7 +5,6 @@ version definitiva ya termine de pulir todo lo q quise.
 - tutorial movido al menu
 
 - evolucion de instrumentos balanceado para que sea mas dificil:
-- 
 1. btc sube o baja aleatoriamente cada mes entre hasta 40%, hasta tan bajo como -30%. tambien en junio y noviembre puede llegar a subir 70%, o bajar -80%.
 2. los dolares ahora funcionan correctamente (antes no subian)
 3. el sp500 paso de subir un 1% por mes a un 3% por mes
