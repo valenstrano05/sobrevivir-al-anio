@@ -29,6 +29,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
         cout<<"| 2. Highscore de la sesion            |"<<endl;
         cout<<"| 3. Glosario financiero               |"<<endl;
         cout<<"| 4. Detalles de la sesión             |"<<endl;
+        cout<<"| 5. Tutorial                          |"<<endl;
         cout<<"|                                      |"<<endl;
         cout<<"| 0. Salir                             |"<<endl;
         cout<<"|                                      |"<<endl;
@@ -86,7 +87,8 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
             glosarioFinanciero();
             break;
         case 4:
-            if(contadorPartida==0){
+            if(contadorPartida==0)
+            {
                 rlutil::hidecursor();
                 system("cls");
                 cout<<" =================================================="<<endl;
@@ -110,9 +112,13 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
                 system("pause > nul");
                 rlutil::showcursor();
             }
-            else{
+            else
+            {
                 detallesSesion(patrimonioReal, nombre, contadorPartida);
             }
+            break;
+        case 5:
+            tutorial();
             break;
         case 0:
             system("cls");
@@ -124,6 +130,7 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
             cout<<"| 2. Highscore de la sesion            |"<<endl;
             cout<<"| 3. Glosario financiero               |"<<endl;
             cout<<"| 4. Detalles de la sesión             |"<<endl;
+            cout<<"| 5. Tutorial                          |"<<endl;
             cout<<"|                                      |"<<endl;
             cout<<"| 0. Salir                             |"<<endl;
             cout<<" ======================================"<<endl;
@@ -131,25 +138,25 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
             cout<<"|                                      |"<<endl;
             cout<<"|                                      |"<<endl;
             cout<<" ======================================"<<endl;
-            rlutil::locate(2, 12);
+            rlutil::locate(2, 13);
             escribirLento(" ¿Está seguro/a que quiere salir?", 20);
             cout<<endl;
-            rlutil::locate(2, 13);
+            rlutil::locate(2, 14);
             escribirLento(" ¿s/n?", 20);
-            rlutil::locate(9, 13);
+            rlutil::locate(9, 14);
             cin>>salida;
             switch(salida)
             {
             case 's':
-                rlutil::locate(2, 14);
+                rlutil::locate(2, 15);
                 escribirLento(" Saliendo del juego", 20);
                 Sleep(100);
                 escribirLento("...", 200);
-                rlutil::locate(2, 15);
+                rlutil::locate(2, 16);
                 return;
                 break;
             case 'n':
-                rlutil::locate(2, 14);
+                rlutil::locate(2, 15);
                 escribirLento(" Regresando al menú", 20);
                 Sleep(100);
                 escribirLento("...", 200);
@@ -165,7 +172,8 @@ void menuPrincipal(string nombre[], double patrimonioReal[])
     }
 }
 
-void detallesSesion(double patrimonioReal[], string nombre[], int contadorPartida){
+void detallesSesion(double patrimonioReal[], string nombre[], int contadorPartida)
+{
     rlutil::hidecursor();
     system("cls");
     cout<<" =================================================="<<endl;
@@ -173,26 +181,41 @@ void detallesSesion(double patrimonioReal[], string nombre[], int contadorPartid
     cout<<"|                    (máx. 5)                      |"<<endl;
     cout<<" ================================================== "<<endl;
     cout<<"|                                                  |"<<endl;
-    cout<<"| 1."<<nombre[0]<<": $"<<patrimonioReal[0];
+    cout<<"| 1."<<nombre[0]<<": ";
+    mostrarColor(patrimonioReal, 0);
     rlutil::locate(52, 6);
     cout<<"|                                         "<<endl;
-    cout<<"| 2."<<nombre[1]<<": $"<<patrimonioReal[1];
+    cout<<"| 2."<<nombre[1]<<": ";
+    mostrarColor(patrimonioReal, 1);
     rlutil::locate(52, 7);
     cout<<"|                                         "<<endl;
-    cout<<"| 3."<<nombre[2]<<": $"<<patrimonioReal[2];
+    cout<<"| 3."<<nombre[2]<<": ";
+    mostrarColor(patrimonioReal, 2);
     rlutil::locate(52, 8);
     cout<<"|                                         "<<endl;
-    cout<<"| 4."<<nombre[3]<<": $"<<patrimonioReal[3];
+    cout<<"| 4."<<nombre[3]<<": ";
+    mostrarColor(patrimonioReal, 3);
     rlutil::locate(52, 9);
     cout<<"|                                         "<<endl;
-    cout<<"| 5."<<nombre[4]<<": $"<<patrimonioReal[4];
+    cout<<"| 5."<<nombre[4]<<": ";
+    mostrarColor(patrimonioReal, 4);
     rlutil::locate(52, 10);
     cout<<"|                                         "<<endl;
     cout<<"|                                                  |"<<endl;
     cout<<" =================================================="<<endl;
     cout<<" Presione una tecla para regresar al menú"<<endl;
-    rlutil::locate(42, 18);
+
+    rlutil::setColor(rlutil::GREEN);
+    rlutil::locate(54, 6);
+    cout<<"Verde: Vencio a la inflacion"<<endl;
+    rlutil::setColor(rlutil::YELLOW);
+    rlutil::locate(54, 7);
+    cout<<"Amarillo: Empato contra la inflacion"<<endl;
+    rlutil::setColor(rlutil::RED);
+    rlutil::locate(54, 8);
+    cout<<"Rojo: Perdio contra la inflacion"<<endl;
     system("pause > nul");
+    rlutil::setColor(rlutil::WHITE);
     rlutil::showcursor();
 }
 
@@ -220,7 +243,10 @@ void highscoreDeLaSesion(double patrimonioReal[], string nombre[], int contadorP
     cout<<"| Jugador estrella: "<<nombre[maximo]<<endl;
     rlutil::locate(53, 7);
     cout<<"|"<<endl;
-    cout<<"| Patrimonio real: $"<<patrimonioReal[maximo]<<endl;
+    cout<<"| Patrimonio real: ";
+    rlutil::setColor(rlutil::GREEN);
+    cout<<"$"<<patrimonioReal[maximo]<<endl;
+    rlutil::setColor(rlutil::WHITE);
     rlutil::locate(53, 8);
     cout<<"|"<<endl;
     cout<<" ==================================================="<<endl;

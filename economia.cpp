@@ -33,11 +33,43 @@ const int index_MejorMes=18;
 const int index_PeorMes=19;
 const int index_InflacionAcumulada=20;
 const int index_ImprevistosAcumulados=21;
+const int index_PorcentajeDolar=22;
+const int index_PorcentajeBTC=23;
+const int index_PorcentajeSP500=24;
+const int index_SaldoInicioMes=25;
 
+void cargarDatosPat(double datospat[])
+{
+    for (int a=0; a<5; a++)
+    {
+        switch (a)
+        {
+        case 0:
+            datospat[a]=0.0;
+            break;
+        case 1:
+            datospat[a]=0.0;
+            break;
+        case 2:
+            datospat[a]=0.0;
+            break;
+        case 3:
+            datospat[a]=0.0;
+            break;
+        case 4:
+            datospat[a]=0.0;
+            break;
+
+        default:
+            break;
+        }
+
+    };
+}
 void cargarDatos (double datos[])
 {
 
-    for(int a=0; a<22; a++)
+    for(int a=0; a<26; a++)
     {
         switch(a)
         {
@@ -107,6 +139,18 @@ void cargarDatos (double datos[])
         case 21:
             datos[a]=0.0;
             break;
+        case 22:
+            datos[a]=0.0;
+            break;
+        case 23:
+            datos[a]=0.0;
+            break;
+        case 24:
+            datos[a]=0.0;
+            break;
+        case 25:
+            datos[a]=0.0;
+            break;
         default:
             break;
         }
@@ -149,16 +193,17 @@ void eventosFijos(int mes, double datos[])
         dado=rand()%2;
         if (dado==0)
         {
-            cout<<" BTC se fue a la luna! (aumento del 60%)"<<endl;
-            datos[index_PrecioBTC]*=1.60;
+            cout<<" BTC se fue a la luna! (aumento del 70%)"<<endl;
+            datos[index_PrecioBTC]*=1.70;
+            datos[index_PorcentajeBTC]=70;
         }
         else
         {
-            cout<<" BTC rompio el piso... (disminución del 80%)"<<endl;
+            cout<<" BTC rompio el piso... (disminucion del 80%)"<<endl;
             datos[index_PrecioBTC]*=0.20;
+            datos[index_PorcentajeBTC]=-80;
         }
-        cout<<" ¡Llego el aguinaldo!"<<endl;
-        cout<<" (+$"<<datos[index_Sueldo]*0.50<<" este mes)"<<endl;
+        cout<<" ¡Llego el aguinaldo! (+$"<<datos[index_Sueldo]*0.50<<")"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
         cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
@@ -170,6 +215,7 @@ void eventosFijos(int mes, double datos[])
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 8:
+        cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 9:
@@ -189,19 +235,21 @@ void eventosFijos(int mes, double datos[])
         dado=rand()%2;
         if (dado==0)
         {
-            cout<<" BTC se fue a la luna! (aumento del 60%)"<<endl;
-            datos[index_PrecioBTC]*=1.60;
+            cout<<" BTC se fue a la luna! (aumento del 70%)"<<endl;
+            datos[index_PrecioBTC]*=1.70;
+            datos[index_PorcentajeBTC]=70;
         }
         else
         {
             cout<<" BTC rompio el piso... (disminución del 80%)"<<endl;
             datos[index_PrecioBTC]*=0.20;
+            datos[index_PorcentajeBTC]=-80;
         }
         cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
         break;
     case 12:
-        cout<<" Aguinaldo"<<endl;
+        cout<<" ¡Llego el aguinaldo! (+$"<<datos[index_Sueldo]*0.50<<")"<<endl;
         datos[index_SaldoPesos]+=datos[index_Sueldo]*0.50;
         cout<<" Gastos fijos: -$"<<datos[index_GastosFijos]<<endl;
         datos[index_SaldoPesos]-=datos[index_GastosFijos];
@@ -219,15 +267,15 @@ void imprevistos(double datos[])
     double totalImprevistos=0.0;
     string imprevistoNombre[12]=
     {
-        " Se rompio el lavarropas",
-        " Visita medica inesperada",
-        " Multa de transito",
-        " Tecnico de internet",
+        " Se rompio el lavarropas...",
+        " Tuviste una visita medica inesperada",
+        " Te comiste una multa de transito...",
+        " Llamaste al tecnico de internet",
         " Regalo de cumpleaños obligado",
-        " Rompiste un vidrio en el gimnasio",
-        " Cena o salida social ineludible",
-        " Se rompio la pantalla del celular",
-        " Subio la expensa del edificio",
+        " Rompiste un vidrio en el gimnasio...",
+        " Salida con amigos ineludible",
+        " Se rompio la pantalla del celular...",
+        " Subio la expensa del edificio...",
         " Mini escapada de ultimo momento",
         " Black Friday - oferta irresistible",
         " Regalos de fin de año"
@@ -285,6 +333,14 @@ void imprevistos(double datos[])
         datos[index_FondoEmergencia]-=totalImprevistos;
         datos[index_ImprevistosAcumulados]=totalImprevistos;
     }
+    else if (datos[index_FondoEmergencia]>0)
+    {
+        cout<<" (Acabaste tu fondo en cubrir parte de esto...)"<<endl;
+        datos[index_ImprevistosAcumulados]=totalImprevistos;
+        totalImprevistos-=datos[index_FondoEmergencia];
+        datos[index_FondoEmergencia]=0;
+        datos[index_SaldoPesos]-=totalImprevistos;
+    }
     else
     {
         datos[index_SaldoPesos]-=totalImprevistos;
@@ -305,6 +361,7 @@ void aumentoPorInflacion(double datos[], int rondas)
 {
     const float inflacion = 1.07;
     int dado;
+    float dado2;
     int contadorDisminucion=0;
     datos[index_SaldoPesos]/=inflacion;
     datos[index_FondoEmergencia]/=inflacion;
@@ -315,34 +372,48 @@ void aumentoPorInflacion(double datos[], int rondas)
     datos[index_GastosFijos]=datos[index_GastosAlquiler]+datos[index_GastosComida]+datos[index_GastosServicios]+datos[index_GastosTransporte];
     datos[index_InflacionAcumulada]*=1.07;
     datos[index_PrecioSP500]*=1.05;
+    datos[index_PorcentajeSP500]=3;
     dado=rand()%100;
     if (dado<=9)
     {
-        if (contadorDisminucion<5)
+        if (contadorDisminucion<3)
         {
             datos[index_PrecioDolar]*=0.97;
+            datos[index_PorcentajeDolar]=-3;
             contadorDisminucion++;
         }
     }
     else if (dado<=29)
-        {
-            datos[index_PrecioDolar]*=1.09;
-        }
-    else if (dado<=59)
-        {
-            datos[index_PrecioDolar]*=1.10;
-        }
-    else
-        {
-            datos[index_PrecioDolar]*=1.11;
-        }
-
-    if (rondas%2==0)
     {
-        datos[index_PrecioBTC]*=1.25;
+        datos[index_PrecioDolar]*=1.09;
+        datos[index_PorcentajeDolar]=9;
+    }
+    else if (dado<=59)
+    {
+        datos[index_PrecioDolar]*=1.10;
+        datos[index_PorcentajeDolar]=10;
     }
     else
     {
-        datos[index_PrecioBTC]*=0.80;
+        datos[index_PrecioDolar]*=1.11;
+        datos[index_PorcentajeDolar]=11;
+    }
+    if(rondas!=6||rondas!=11)
+    {
+        dado=rand()%100;
+        if (dado<=59)
+        {
+            dado2=rand()%21;
+            float porcentaje=20+dado2;
+            datos[index_PorcentajeBTC]=porcentaje;
+            datos[index_PrecioBTC]*=(1+porcentaje/100.0);
+        }
+        else
+        {
+            dado2=rand()%16;
+            float porcentaje=15+dado2;
+            datos[index_PorcentajeBTC]=(-porcentaje);
+            datos[index_PrecioBTC]*=(1-porcentaje/100.0);
+        }
     }
 }

@@ -371,75 +371,140 @@ void tutorial()
 
 void tipsEducativos(int mes)
 {
-    int x=44;
+    int x=50;
     int y=1;
-    rlutil::locate(x, y); cout << " =====================================" << endl;
-    rlutil::locate(x, y+1); cout << "|          ~CONSEJO DEL MES~          |" << endl;
-    rlutil::locate(x, y+2); cout << " =====================================" << endl;
+    rlutil::locate(x, y);
+    cout << " =====================================" << endl;
+    rlutil::locate(x, y+1);
+    cout << "|          ~CONSEJO DEL MES~          |" << endl;
+    rlutil::locate(x, y+2);
+    cout << " =====================================" << endl;
 
     switch (mes)
     {
     case 1:
-        rlutil::locate(x, y+3); cout << " La INFLACION es el aumento sostenido de" << endl;
-        rlutil::locate(x, y+4); cout << " los precios. Tus $500k de hoy valen menos" << endl;
-        rlutil::locate(x, y+5); cout << " cada mes que pasa." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" La INFLACION es el aumento sostenido de"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" los precios. Tus $650k de hoy valen menos"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" cada mes que pasa. (Aprox. 7%)"<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 2:
-        rlutil::locate(x, y+3); cout << " El FONDO DE EMERGENCIA cubre imprevistos" << endl;
-        rlutil::locate(x, y+4); cout << " sin tener que vender inversiones a perdida." << endl;
-        rlutil::locate(x, y+5); cout << " Se recomienda tener 3-6 meses de gastos." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" El FONDO DE EMERGENCIA cubre IMPREVISTOS"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" sin tener que vender inversiones a perdida."<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" Se recomienda tener 3-6 meses de gastos."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 3:
-        rlutil::locate(x, y+3); cout << " El COSTO DE OPORTUNIDAD es lo que resignas" << endl;
-        rlutil::locate(x, y+4); cout << " al elegir. Dejar plata en pesos 'sin hacer" << endl;
-        rlutil::locate(x, y+5); cout << " nada' tiene un costo: la inflacion." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" El COSTO DE OPORTUNIDAD es lo que resignas"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" al elegir. Dejar plata en pesos 'sin hacer"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" nada' tiene un costo: la inflacion."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 4:
-        rlutil::locate(x, y+3); cout << " Tu sueldo subio 15% pero la inflacion" << endl;
-        rlutil::locate(x, y+4); cout << " acumulada ya supera ese numero. Eso se" << endl;
-        rlutil::locate(x, y+5); cout << " llama caida del SALARIO REAL." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" Tu sueldo subio 15% pero la inflacion"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" acumulada ya supera ese numero. Eso se"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" llama caida del SALARIO REAL."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 5:
-        rlutil::locate(x, y+3); cout << " DIVERSIFICAR es distribuir el dinero en" << endl;
-        rlutil::locate(x, y+4); cout << " varios instrumentos para no depender de uno" << endl;
-        rlutil::locate(x, y+5); cout << " solo. No pongas todos los huevos en una" << endl;
-        rlutil::locate(x, y+6); cout << " canasta." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" DIVERSIFICAR es distribuir el dinero en"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" varios instrumentos para no depender de uno"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" solo. No pongas todos los huevos en una"<<endl;
+        rlutil::locate(x, y+6);
+        cout<<" canasta."<<endl;
+        rlutil::locate(x, y+8);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 6:
-        rlutil::locate(x, y+3); cout << " El AGUINALDO (SAC) es un derecho laboral." << endl;
-        rlutil::locate(x, y+4); cout << " Existe porque el sueldo no ajusta" << endl;
-        rlutil::locate(x, y+5); cout << " continuamente. Si la inflacion es alta," << endl;
-        rlutil::locate(x, y+6); cout << " igual perdes poder adquisitivo." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" El AGUINALDO (SAC) es un derecho laboral."<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" Existe porque el sueldo no ajusta"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" continuamente. Si la inflacion es alta,"<<endl;
+        rlutil::locate(x, y+6);
+        cout<<" igual perdes poder adquisitivo."<<endl;
+        rlutil::locate(x, y+8);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 7:
-        rlutil::locate(x, y+3); cout << " La VOLATILIDAD mide cuanto varia el precio" << endl;
-        rlutil::locate(x, y+4); cout << " de un activo. Bitcoin es muy volatil: puede" << endl;
-        rlutil::locate(x, y+5); cout << " hacerte rico o dejarte en cero en un mes." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" La VOLATILIDAD mide cuanto varia el precio"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" de un activo. Bitcoin es muy volatil: puede"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" hacerte rico o dejarte en cero en un mes."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 8:
-        rlutil::locate(x, y+3); cout << " La LIQUIDEZ es que tan facil podes convertir" << endl;
-        rlutil::locate(x, y+4); cout << " un activo en efectivo. El cash es lo mas" << endl;
-        rlutil::locate(x, y+5); cout << " liquido; una propiedad, lo menos." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" La LIQUIDEZ es que tan facil podes convertir"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" un activo en efectivo. El cash es lo mas"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" liquido; una propiedad, lo menos."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 9:
-        rlutil::locate(x, y+3); cout << " La INDEXACION ajusta contratos segun la" << endl;
-        rlutil::locate(x, y+4); cout << " inflacion. Tu alquiler se actualizo asi." << endl;
-        rlutil::locate(x, y+5); cout << " Protege al duenio pero te afecta a vos." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" La INDEXACION ajusta contratos segun la"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" inflacion. Tu alquiler se actualizo asi."<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" Protege al dueño pero te afecta a vos."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 10:
-        rlutil::locate(x, y+3); cout << " El S&P 500 es un indice de las 500 empresas" << endl;
-        rlutil::locate(x, y+4); cout << " mas grandes de EE.UU. Invertir en su ETF es" << endl;
-        rlutil::locate(x, y+5); cout << " apostar al crecimiento del capitalismo." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" El S&P 500 es un indice de las 500 empresas"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" mas grandes de EE.UU. Invertir en su ETF es"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" apostar al crecimiento del capitalismo."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 11:
-        rlutil::locate(x, y+3); cout << " El BITCOIN tuvo un mes extremo. Asi es la" << endl;
-        rlutil::locate(x, y+4); cout << " ESPECULACION: ganancias y perdidas enormes" << endl;
-        rlutil::locate(x, y+5); cout << " en poco tiempo. No es para todos los perfiles." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" El BITCOIN tuvo un mes extremo. Asi es la"<<endl;
+        rlutil::locate(x, y+4);
+        cout<<" ESPECULACION: ganancias y perdidas enormes"<<endl;
+        rlutil::locate(x, y+5);
+        cout<<" en poco tiempo. No es para todos los perfiles."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     case 12:
-        rlutil::locate(x, y+3); cout << " El PATRIMONIO REAL es lo que vale tu dinero" << endl;
-        rlutil::locate(x, y+4); cout << " ajustado por inflacion. No alcanza con tener" << endl;
-        rlutil::locate(x, y+5); cout << " mas pesos: hay que ganarle a la inflacion." << endl;
+        rlutil::locate(x, y+3);
+        cout<<" El PATRIMONIO REAL es lo que vale tu dinero" << endl;
+        rlutil::locate(x, y+4);
+        cout<<" ajustado por inflacion. No alcanza con tener" << endl;
+        rlutil::locate(x, y+5);
+        cout<<" mas pesos: hay que ganarle a la inflacion."<<endl;
+        rlutil::locate(x, y+7);
+        cout<<" [G] Glosario"<<endl;
         break;
     }
 }
@@ -454,31 +519,82 @@ void cartelesInstrumentos(int opcion)
     };
     int x=44;
     int y=5;
-    rlutil::locate(x, y); cout << "  -------------------------------------" << endl;
-    rlutil::locate(x, y+1); cout << " |                ~"<<nombre_instrumento[opcion-1]<<"~               |" << endl;
-    rlutil::locate(x, y+2); cout << "  -------------------------------------" << endl;
+    rlutil::locate(x, y);
+    cout << "  ------------------------------------------------" << endl;
+    rlutil::locate(x, y+1);
+    cout << " |                      ~"<<nombre_instrumento[opcion-1]<<"~                     |" << endl;
+    rlutil::locate(x, y+2);
+    cout << "  ------------------------------------------------" << endl;
 
     switch (opcion)
     {
     case 1:
-        rlutil::locate(x, y+3); cout << " Los USD son una reserva de valor históricamente" << endl;
-        rlutil::locate(x, y+4); cout << " confiable. Sube un ~10% mensual, aunque pocas veces" << endl;
-        rlutil::locate(x, y+5); cout << " puede bajar muy poquito." << endl;
+        rlutil::locate(x, y+3);
+        cout << "  Los USD son una reserva de valor históricamente" << endl;
+        rlutil::locate(x, y+4);
+        cout << "  confiable. Sube un ~10% mensual, aunque pocas veces" << endl;
+        rlutil::locate(x, y+5);
+        cout << "  puede bajar muy poquito." << endl;
         break;
     case 2:
-        rlutil::locate(x, y+3); cout << " El BTC es un instrumento de muy alta volatilidad." << endl;
-        rlutil::locate(x, y+4); cout << " A veces puede subir 25%, otras veces bajar 20%." << endl;
-        rlutil::locate(x, y+5); cout << " Cuidado, que en Junio y Noviembre puede" << endl;
-        rlutil::locate(x, y+6); cout << " o irse a la luna, o romper el piso..." << endl;
+        rlutil::locate(x, y+3);
+        cout << "  El BTC es un instrumento de muy alta volatilidad." << endl;
+        rlutil::locate(x, y+4);
+        cout << "  A veces puede subir 25%, otras veces bajar 20%." << endl;
+        rlutil::locate(x, y+5);
+        cout << "  Cuidado, que en Junio y Noviembre puede" << endl;
+        rlutil::locate(x, y+6);
+        cout << "  o irse a la luna, o romper el piso..." << endl;
         break;
     case 3:
-        rlutil::locate(x, y+3); cout << " El S&P 500 es un índice de mercado estadounidense" << endl;
-        rlutil::locate(x, y+4); cout << " que es perfecto para perfiles conservadores." << endl;
-        rlutil::locate(x, y+5); cout << " Mensualmente, crece un 1%. No tiene sorpresas." << endl;
+        rlutil::locate(x, y+3);
+        cout << "  El S&P 500 es un índice de mercado estadounidense" << endl;
+        rlutil::locate(x, y+4);
+        cout << "  que es perfecto para perfiles conservadores." << endl;
+        rlutil::locate(x, y+5);
+        cout << "  Mensualmente, crece un 3%. No tiene sorpresas." << endl;
         break;
 
     default:
         break;
     }
 
+}
+void mostrarPorcentaje(double datosp[], int inst)
+{
+    string nombres[6]
+    {
+        "hola",
+        "hola",
+        "hola",
+        "Dolares",
+        "Bitcoin",
+        "SP500"
+    };
+    if (datosp[inst+19]>=0)
+    {
+        cout<<"  "<<nombres[inst]<<": $"<<datosp[inst]<<" ($"<<datosp[inst]*datosp[inst+3]<<") +"<<datosp[inst+19]<<"%"<<endl;
+    }
+    else
+    {
+        cout<<"  "<<nombres[inst]<<": $"<<datosp[inst]<<" ($"<<datosp[inst]*datosp[inst+3]<<") "<<datosp[inst+19]<<"%"<<endl;
+    }
+}
+
+void mostrarColor(double datosPat[], int posicion)
+{
+    if (datosPat[posicion]==0)
+    {
+        rlutil::setColor(rlutil::WHITE);
+    }
+    else if(datosPat[posicion]>650000*1.10)
+    {
+        rlutil::setColor(rlutil::GREEN);
+    }
+    else
+    {
+        (datosPat[posicion]>=650000*0.90&&datosPat[posicion]<=650000*1.10)?rlutil::setColor(rlutil::YELLOW):rlutil::setColor(rlutil::RED);
+    }
+    cout<<"$"<<datosPat[posicion];
+    rlutil::setColor(rlutil::WHITE);
 }

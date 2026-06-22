@@ -10,6 +10,7 @@ void crearPartidaNueva(int contadorPartida, std::string nombre[], double patrimo
 void highscoreDeLaSesion(double patrimonioReal[], std::string nombre[], int contadorPartida);
 void glosarioFinanciero();
 void cargarDatos(double datos[]);
+void cargarDatosPat(double datospat[]);
 void glosario();
 void eventosFijos(int mes, double datos[]);
 void imprevistos(double datos[]);
@@ -29,5 +30,7 @@ void cartelTutorial();
 void detallesSesion(double patrimonioReal[], std::string nombre[], int contadorPartida);
 void cartelParpadeante(std::string asciiArt);
 void cartelesInstrumentos(int opcion);
+void mostrarColor(double datosPat[], int posicion);
+void mostrarPorcentaje(double datos[], int inst);
 
 #endif // FUNCIONES_H_INCLUDED
