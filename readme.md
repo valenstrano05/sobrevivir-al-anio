@@ -14,4 +14,4 @@ version definitiva ya termine de pulir todo lo q quise.
 IMPORTANTE LEAN ESTO
 si quieren podemos pushear esto al main y defenderlo, total no es muy complicado lo que hice y para mi termino quedando ya basicamente perfecto. si no, este branch lo dejamos asi y defendemos lo que esta en el main, que es basicamente lo mismo que vimos el martes 16. yo estos cambios los hice por caprichos nomas
 
-[descargar exe](https://cdn.discordapp.com/attachments/756232282330759318/1516943238920146965/Sobrevivir_el_Ano.exe?ex=6a347afb&is=6a33297b&hm=bbfa080359a38f229e1003e6aeaf08333a9c2c0d61bf74031aadc8b37fbb3b42&)
+[descargar exe](https://cdn.discordapp.com/attachments/1496217654665675034/1518631198329540648/Sobrevivir_al_ano.exe?ex=6a3a9f04&is=6a394d84&hm=d45250cd3c1d6af6dac03216d4557c780b5214d34ac87cb9ab91bf2b208b6351&)
